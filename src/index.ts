@@ -1,17 +1,18 @@
-import express from 'express'
 import { fetchAndParse } from './parser'
+import { PromiseType } from 'utility-types'
+import './app'
 
-const app = express()
+export let data: PromiseType<ReturnType<typeof fetchAndParse>> | undefined
 
-app.get('/api', async (request, response) => {
+const refreshData = async () => {
+  console.log('Refreshing data.')
   try {
-    const data = await fetchAndParse()
-    return response.send(data)
+    data = await fetchAndParse()
   } catch (error) {
+    console.log('Error refreshing data:')
     console.error(error)
-    return response.status(500).send('Internal server error')
   }
-})
+}
 
-const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Listening on port: ${port}`))
+setInterval(refreshData, 10 * 60 * 1000)
+refreshData()
