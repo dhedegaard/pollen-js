@@ -54,7 +54,6 @@ const parseXMLStructure = function*(
   xml: any
 ): IterableIterator<ParsedXMLStructure> {
   for (const region of xml.pollen_info.region) {
-    console.log('***REGION:', JSON.stringify(region, null, 2))
     yield {
       city: region.name[0],
       values: region.readings[0].reading.reduce(
