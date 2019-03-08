@@ -35,14 +35,14 @@ html(lang="en", prefix="og: http://ogp.me/ns#")
                   small #{index}: &nbsp;
                   if val < 0
                     span.text-muted -
-                  if val === 0
+                  else if val < 1
                     span.text-muted= val
-                  else if val <= 20
-                    b.text-muted.text-success= val
-                  else if val <= 50
-                    b.text-muted.text-warning= val
+                  else if val < 21
+                    b.text-success= val
+                  else if val <= 51
+                    b.text-warning= val
                   else
-                    b.text-muted.text-danger= val
+                    b.text-danger= val
     .row.text-right
       .col
         small.text-muted
