@@ -1,0 +1,52 @@
+doctype html
+html(lang="en", prefix="og: http://ogp.me/ns#")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    meta(name="theme-color", content="#FFFFFF")
+    meta(name="mobile-web-app-capable", content="yes")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(http-equiv="refresh", content="600")
+    meta(property="og:site_name", content="Pollen")
+    meta(property="og:url", content="https://pollen.dhedegaard.dk/")
+    meta(property="og:title", content="Pollen")
+    meta(property="og:description", content="{{ range .output }}{{ .CityName }} - {{ end }}")
+    meta(property="og:image", content="/static/favicon.png")
+    title Pollen
+    link(rel="shortcut icon", href="/static/favicon.ico")
+    link(rel="manifest", href="/static/manifest.json")
+    link(rel="apple-touch-icon", href="/static/favicon.png")
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
+  body
+  nav.navbar.navbar-light(style="background-color: #acf8ac;")
+    .container
+      span.navbar-brand.text-left
+        img(src="/static/favicon.png", width="30", height="30" class="d-inline-block align-top", alt="Pollen icon")
+        span Pollen
+  .container
+    .row
+      each elem in data
+        .col
+          .card
+            h5.card-header= elem.city
+            ul.list-group.list-group-flush
+              each val, index in elem.values
+                li.list-group-item
+                  small #{index}: &nbsp;
+                  if val < 0
+                    span.text-muted -
+                  if val === 0
+                    span.text-muted= val
+                  else if val <= 20
+                    b.text-muted.text-success= val
+                  else if val <= 50
+                    b.text-muted.text-warning= val
+                  else
+                    b.text-muted.text-danger= val
+    .row.text-right
+      .col
+        small.text-muted
+          if cacheTimestamp
+            span.text-nowrap Cache timestamp: <b>#{cacheTimestamp.toUTCString()}</b>.
+            br
+          span.text-nowrap API available <a href="/api">here</a>, get the source on <a href="https://github.com/dhedegaard/pollen">Github</a>

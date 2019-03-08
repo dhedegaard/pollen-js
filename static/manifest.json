@@ -1,0 +1,13 @@
+{
+    "name": "Pollen",
+    "short_name": "Pollen",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "icons": [
+        {
+            "src": "/static/favicon.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ]
+}

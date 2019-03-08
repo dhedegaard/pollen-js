@@ -1,7 +1,18 @@
 import express from 'express'
-import { data } from '.'
+import { cacheTimestamp, data } from '.'
 
 const app = express()
+
+app.use('/static', express.static('static'))
+
+app.set('view engine', 'pug')
+
+app.get('/', async (request, response) => {
+  response.render('index', {
+    data,
+    cacheTimestamp
+  })
+})
 
 app.get('/api', async (request, response) => {
   try {
