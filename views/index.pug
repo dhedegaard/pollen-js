@@ -44,6 +44,9 @@ html(lang="en", prefix="og: http://ogp.me/ns#")
                     b.text-warning= val
                   else
                     b.text-danger= val
+              if elem.forecast
+                li.list-group-item
+                  small.text-muted= elem.forecast
     .row.text-right
       .col
         small.text-muted
