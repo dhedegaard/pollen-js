@@ -40,11 +40,11 @@ type Query {
   """
   When the data is from, as a ISO8601 string
   """
-  cacheTimestamp: String!
+  cacheTimestamp: String
   """
   The currently available data, for the various cities
   """
-  data: [DataElem!]!
+  data: [DataElem!]
 }
 `)
 
@@ -61,7 +61,8 @@ const resolver = {
       }))
     }))
   },
-  cacheTimestamp: () => cacheTimestamp
+  cacheTimestamp: () =>
+    cacheTimestamp == null ? cacheTimestamp : cacheTimestamp.toISOString()
 }
 
 export default (app: express.Express) => {
