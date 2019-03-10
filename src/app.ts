@@ -1,5 +1,7 @@
 import express from 'express'
+import expressGraphql from 'express-graphql'
 import { cacheTimestamp, data } from '.'
+import api from './api'
 
 const app = express()
 
@@ -14,17 +16,7 @@ app.get('/', async (request, response) => {
   })
 })
 
-app.get('/api', async (request, response) => {
-  try {
-    return response.send({
-      data,
-      cacheTimestamp
-    })
-  } catch (error) {
-    console.error(error)
-    return response.status(500).send('Internal server error')
-  }
-})
+api(app)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Listening on port: ${port}`))

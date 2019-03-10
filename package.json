@@ -9,8 +9,12 @@
     "start": "tsc && node ./build/index.js"
   },
   "dependencies": {
+    "@types/express-graphql": "^0.6.2",
+    "@types/graphql": "^14.0.7",
     "axios": "^0.18.0",
     "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
     "pug": "^2.0.3",
     "typescript": "^3.3.3333",
     "utility-types": "^3.4.1",
