@@ -67,7 +67,13 @@ const resolvers = {
   }
 }
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // Enable the playground, even in production.
+  playground: true,
+  introspection: true
+})
 
 export default (app: express.Express) => {
   server.applyMiddleware({ app })
