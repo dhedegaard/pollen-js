@@ -1,5 +1,4 @@
 import express from 'express'
-import expressGraphql from 'express-graphql'
 import { cacheTimestamp, data } from '.'
 import api from './api'
 
