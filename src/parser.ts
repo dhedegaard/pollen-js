@@ -58,7 +58,7 @@ const parseXMLStructure = function*(
       city: region.name[0],
       values: region.readings[0].reading.reduce(
         (
-          obj: { [key: string]: number | string },
+          obj: { [key: string]: number | string | undefined },
           elem: { name: string; value: string }
         ) => {
           const value = elem.value[0]
