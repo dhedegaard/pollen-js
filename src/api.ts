@@ -16,6 +16,10 @@ const typeDefs = gql`
     The amount of that pollen per square meter
     """
     value: Int
+    """
+    Some text, if the value is not parseable as an integer.
+    """
+    text: String
   }
 
   """
@@ -58,7 +62,8 @@ const resolvers = {
         ...city,
         values: Object.entries(city.values).map(([key, value]) => ({
           type: key,
-          value: value < 0 ? null : value
+          value: typeof value !== 'number' ? null : value,
+          text: typeof value !== 'string' ? null : value
         }))
       }))
     },
