@@ -34,8 +34,10 @@ html(lang="en", prefix="og: http://ogp.me/ns#")
               each val, index in elem.values
                 li.list-group-item
                   small #{index}: &nbsp;
-                  if val < 0
+                  if val == null
                     span.text-muted -
+                  else if typeof val === 'string'
+                    span.text-warning= val
                   else if val < 1
                     span.text-muted= val
                   else if val < 21

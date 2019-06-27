@@ -1,5 +1,5 @@
-import 'xml2js'
 import Axios from 'axios'
+import 'xml2js'
 import { parseString } from 'xml2js'
 
 const APIURL =
@@ -44,9 +44,9 @@ const parseXml = (xml: string) =>
     })
   })
 
-type ParsedXMLStructure = {
+interface ParsedXMLStructure {
   city: string
-  values: { [key: string]: number }
+  values: { [key: string]: number | string | undefined }
   forecast: string
 }
 
@@ -58,11 +58,16 @@ const parseXMLStructure = function*(
       city: region.name[0],
       values: region.readings[0].reading.reduce(
         (
-          obj: { [key: string]: number },
+          obj: { [key: string]: number | string },
           elem: { name: string; value: string }
         ) => {
           const value = elem.value[0]
-          obj[elem.name] = value === '-' ? -1 : parseInt(value, 10)
+          obj[elem.name] =
+            value === '-'
+              ? undefined
+              : !/\d+/.test(value)
+              ? value
+              : parseInt(value, 10)
           return obj
         },
         {}
