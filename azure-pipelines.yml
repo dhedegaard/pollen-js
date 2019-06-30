@@ -9,7 +9,7 @@ steps:
 - task: Docker@2
   displayName: 'Build and push docker-image'
   inputs:
-    containerRegistry: 'dockerhub'
+    containerRegistry: 'docker-hub'
     repository: 'dhedegaard/pollen-js'
     tags: 'latest'
     command: 'buildAndPush'
