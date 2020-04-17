@@ -44,7 +44,7 @@ const parseXml = (xml: string) =>
     })
   })
 
-interface ParsedXMLStructure {
+export interface ParsedXMLStructure {
   city: string
   values: { [key: string]: number | string | undefined }
   forecast: string

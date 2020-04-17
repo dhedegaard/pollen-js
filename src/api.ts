@@ -58,18 +58,18 @@ const resolvers = {
       if (data == null) {
         return data
       }
-      return data.map(city => ({
+      return data.map((city) => ({
         ...city,
         values: Object.entries(city.values).map(([key, value]) => ({
           type: key,
           value: typeof value !== 'number' ? null : value,
-          text: typeof value !== 'string' ? null : value
-        }))
+          text: typeof value !== 'string' ? null : value,
+        })),
       }))
     },
     cacheTimestamp: () =>
-      cacheTimestamp == null ? cacheTimestamp : cacheTimestamp.toISOString()
-  }
+      cacheTimestamp == null ? cacheTimestamp : cacheTimestamp.toISOString(),
+  },
 }
 
 const server = new ApolloServer({
@@ -77,7 +77,7 @@ const server = new ApolloServer({
   resolvers,
   // Enable the playground, even in production.
   playground: true,
-  introspection: true
+  introspection: true,
 })
 
 export default (app: express.Express) => {
