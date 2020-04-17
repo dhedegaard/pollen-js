@@ -10,7 +10,7 @@ const app = express()
 app.use('/static', express.static('static'))
 
 app.get('/', async (request, response) => {
-  response.write('<!doctype html>')
+  response.contentType('html').write('<!doctype html>')
   ReactDOMServer.renderToStaticNodeStream(
     <Index data={data} cacheTimestamp={cacheTimestamp} />
   ).pipe(response)
