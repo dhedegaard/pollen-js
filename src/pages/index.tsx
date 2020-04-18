@@ -49,7 +49,7 @@ const Index: React.FC<Props> = (props) => (
         <div className="container">
           <span className="navbar-brand text-left">
             <img
-              src="/static/favicon.png"
+              src="/static/logo.png"
               width="30"
               height="30"
               className="d-inline-block align-top"
