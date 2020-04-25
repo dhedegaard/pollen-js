@@ -1,30 +1,40 @@
 import React from 'react'
+import { Box } from '@material-ui/core'
 
 type Props = {
   value: string | number | undefined
 }
 const ValueItem: React.FC<Props> = ({ value }) => {
   if (value == null) {
-    return <span className="text-muted">-</span>
+    return (
+      <Box component="span" color="text.secondary">
+        -
+      </Box>
+    )
   }
   if (typeof value === 'string') {
-    return <span className="text-warning">{value}</span>
+    return (
+      <Box component="span" color="warning.main">
+        {value}
+      </Box>
+    )
   }
   if (value < 1) {
-    return <span className="text-muted">{value.toString()}</span>
+    return (
+      <Box component="span" color="text.secondary">
+        {value.toString()}
+      </Box>
+    )
   }
   return (
-    <b
-      className={
-        value < 21
-          ? 'text-success'
-          : value < 51
-          ? 'text-warning'
-          : 'text-danger'
+    <Box
+      component="b"
+      color={
+        value < 21 ? 'success.main' : value < 51 ? 'warning.main' : 'error.dark'
       }
     >
       {value.toString()}
-    </b>
+    </Box>
   )
 }
 

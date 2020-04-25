@@ -1,109 +1,163 @@
 import React from 'react'
 import { ParsedXMLStructure } from '../parser'
 import ValueItem from '../components/ValueItem'
+import {
+  AppBar,
+  CssBaseline,
+  Container,
+  Typography,
+  Toolbar,
+  colors,
+  ThemeProvider,
+  createMuiTheme,
+  Grid,
+  Box,
+  Card,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Table,
+} from '@material-ui/core'
+import styled from 'styled-components'
+
+const SizedTypography = styled(Typography)<{
+  fontSize: React.CSSProperties['fontSize']
+}>`
+  font-size: ${(p) => p.fontSize};
+`
+
+const HeaderTypography = styled(Typography)`
+  display: flex;
+  align-items: center;
+`
 
 type Props = {
   data: ParsedXMLStructure[] | undefined
   cacheTimestamp: Date | undefined
 }
 const Index: React.FC<Props> = (props) => (
-  <html lang="en" prefix="og: http://ogp.me/ns#">
-    <head>
-      <meta charSet="utf-8" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
-      <meta name="theme-color" content="#FFFFFF" />
-      <meta name="mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta httpEquiv="refresh" content="600" />
-      <meta property="og:site_name" content="Pollen" />
-      <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
-      <meta property="og:title" content="Pollen" />
-      <meta
-        property="og:description"
-        content={
-          props.data?.map((e) => `${e.city}: ${e.forecast}`).join(' - ') ?? ''
-        }
-      />
-      <meta property="og:image" content="/static/favicon.png" />
-      <title>Pollen</title>
-      <link rel="shortcut icon" href="/static/favicon.ico" />
-      <link rel="manifest" href="/static/manifest.json" />
-      <link rel="apple-touch-icon" href="/static/favicon.png" />
-      <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossOrigin="anonymous"
-      />
-    </head>
-    <body>
-      <nav
-        className="navbar navbar-light"
-        style={{
-          backgroundColor: '#acf8ac',
-        }}
-      >
-        <div className="container">
-          <span className="navbar-brand text-left">
-            <img
-              src="/static/favicon.png"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="Pollen icon"
-            />
-            <span>Pollen</span>
-          </span>
-        </div>
-      </nav>
-      <div className="container">
-        <div className="row">
-          {props.data?.map((elem) => (
-            <div className="col" key={elem.city}>
-              <div className="card">
-                <h5 className="card-header">{elem.city}</h5>
-                <ul className="list-group list-group-flush">
-                  {Object.entries(elem.values).map(([index, val]) => (
-                    <li key={index} className="list-group-item">
-                      <small>{index}: </small>
-                      <ValueItem value={val} />
-                    </li>
-                  ))}
-                  {elem.forecast !== '' && (
-                    <li className="list-group-item">
-                      <small className="text-muted">{elem.forecast}</small>
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="row text-right">
-          <div className="col">
-            <small className="text-muted">
+  <ThemeProvider
+    theme={createMuiTheme({
+      palette: {
+        primary: colors.lightGreen,
+        secondary: colors.grey,
+      },
+    })}
+  >
+    <html lang="en" prefix="og: http://ogp.me/ns#">
+      <CssBaseline />
+      <head>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta httpEquiv="refresh" content="600" />
+        <meta property="og:site_name" content="Pollen" />
+        <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
+        <meta property="og:title" content="Pollen" />
+        <meta
+          property="og:description"
+          content={
+            props.data?.map((e) => `${e.city}: ${e.forecast}`).join(' - ') ?? ''
+          }
+        />
+        <meta property="og:image" content="/static/favicon.png" />
+        <title>Pollen</title>
+        <link rel="shortcut icon" href="/static/favicon.ico" />
+        <link rel="manifest" href="/static/manifest.json" />
+        <link rel="apple-touch-icon" href="/static/favicon.png" />
+      </head>
+      <body>
+        <Box mb={2}>
+          <AppBar position="static" color="primary">
+            <Toolbar variant="dense">
+              <Container>
+                <HeaderTypography variant="h6">
+                  <img
+                    src="/static/favicon.png"
+                    width="30"
+                    height="30"
+                    alt="Pollen icon"
+                  />
+                  <span>Pollen</span>
+                </HeaderTypography>
+              </Container>
+            </Toolbar>
+          </AppBar>
+        </Box>
+        <Container>
+          <Grid container spacing={3}>
+            {props.data?.map((elem) => (
+              <Grid item xs={12} sm={6} key={elem.city}>
+                <Card>
+                  <TableContainer>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>
+                            <SizedTypography fontSize="1.2em">
+                              {elem.city}
+                            </SizedTypography>
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {Object.entries(elem.values).map(
+                          ([pollenName, val]) => (
+                            <TableRow key={pollenName}>
+                              <TableCell>
+                                <div>
+                                  <SizedTypography fontSize="0.9em">
+                                    {pollenName}: <ValueItem value={val} />
+                                  </SizedTypography>
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          )
+                        )}
+                        {elem.forecast !== '' && (
+                          <TableRow>
+                            <TableCell>
+                              <SizedTypography fontSize="0.9em">
+                                {elem.forecast}
+                              </SizedTypography>
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          <Box mt={2}>
+            <SizedTypography
+              fontSize="0.9em"
+              paragraph
+              color="secondary"
+              align="right"
+            >
               {props.cacheTimestamp != null && (
                 <>
-                  <span className="text-nowrap">
-                    Cache timestamp: <b>{props.cacheTimestamp.toUTCString()}</b>
-                    .
-                  </span>
+                  Cache timestamp: <b>{props.cacheTimestamp.toUTCString()}</b>.
                   <br />
                 </>
               )}
-              <span>
-                API available <a href="/graphql">here</a>, get the source on{' '}
-                <a href="https://github.com/dhedegaard/pollen-js">Github</a>
-              </span>
-            </small>
-          </div>
-        </div>
-      </div>
-    </body>
-  </html>
+              API available <a href="/graphql">here</a>, get the source on{' '}
+              <a href="https://github.com/dhedegaard/pollen-js">Github</a>
+            </SizedTypography>
+          </Box>
+        </Container>
+      </body>
+    </html>
+  </ThemeProvider>
 )
 
 export default Index
