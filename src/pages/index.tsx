@@ -80,7 +80,7 @@ const Index: React.FC<Props> = (props) => (
               <Container>
                 <HeaderTypography variant="h6">
                   <img
-                    src="/static/favicon.png"
+                    src="/static/logo.png"
                     width="30"
                     height="30"
                     alt="Pollen icon"
