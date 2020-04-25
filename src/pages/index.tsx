@@ -94,7 +94,7 @@ const Index: React.FC<Props> = (props) => (
         <Container>
           <Grid container spacing={3}>
             {props.data?.map((elem) => (
-              <Grid item xs={12} sm={6} key={elem.city}>
+              <Grid item xs={6} key={elem.city}>
                 <Card>
                   <TableContainer>
                     <Table>
