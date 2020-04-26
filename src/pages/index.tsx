@@ -25,15 +25,16 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-family: "Roboto";
+    font-weight: 400;
     font-display: swap;
     src: url('/static/fonts/roboto-latin-400.woff2') format('woff2');
   }
   @font-face {
-    font-family: "Roboto","Helvetica","Arial",sans-serif;
-    font-weight: bold;
+    font-family: "Roboto";
+    font-weight: 500;
     font-display: swap;
-    src: url('/static/fonts/roboto-latin-700.woff2') format('woff2');
+    src: url('/static/fonts/roboto-latin-500.woff2') format('woff2');
   }
 `
 
