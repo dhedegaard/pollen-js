@@ -36,6 +36,12 @@ const GlobalStyle = createGlobalStyle`
     font-display: swap;
     src: url('/static/fonts/roboto-latin-500.woff2') format('woff2');
   }
+  @font-face {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-display: swap;
+    src: url('/static/fonts/roboto-latin-700.woff2') format('woff2');
+  }
 `
 
 const SizedTypography = styled(Typography)<{
