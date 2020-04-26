@@ -72,7 +72,6 @@ const Index: React.FC<Props> = (props) => (
         <meta name="theme-color" content="#FFFFFF" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta httpEquiv="refresh" content="600" />
         <meta property="og:site_name" content="Pollen" />
         <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
         <meta property="og:title" content="Pollen" />
