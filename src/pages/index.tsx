@@ -20,7 +20,21 @@ import {
   TableBody,
   Table,
 } from '@material-ui/core'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-display: swap;
+    src: url('/static/fonts/roboto-latin-400.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: bold;
+    font-display: swap;
+    src: url('/static/fonts/roboto-latin-700.woff2') format('woff2');
+  }
+`
 
 const SizedTypography = styled(Typography)<{
   fontSize: React.CSSProperties['fontSize']
@@ -48,6 +62,7 @@ const Index: React.FC<Props> = (props) => (
   >
     <html lang="en" prefix="og: http://ogp.me/ns#">
       <CssBaseline />
+      <GlobalStyle />
       <head>
         <meta charSet="utf-8" />
         <meta
