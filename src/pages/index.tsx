@@ -102,6 +102,7 @@ const Index: React.FC<Props> = (props) => {
                   <HeaderTypography variant="h6">
                     <img
                       src="/static/logo.png"
+                      srcSet="/static/logo.png 1x, /static/logo@2x.png 2x"
                       width="30"
                       height="30"
                       alt="Pollen icon"
