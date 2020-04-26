@@ -22,6 +22,7 @@ import {
   Link,
 } from '@material-ui/core'
 import styled, { createGlobalStyle } from 'styled-components'
+import { Logo } from '../components/Logo'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -100,13 +101,7 @@ const Index: React.FC<Props> = (props) => {
               <Toolbar variant="dense">
                 <Container>
                   <HeaderTypography variant="h6">
-                    <img
-                      src="/static/logo.png"
-                      srcSet="/static/logo.png 1x, /static/logo@2x.png 2x"
-                      width="30"
-                      height="30"
-                      alt="Pollen icon"
-                    />
+                    <Logo />
                     <span>Pollen</span>
                   </HeaderTypography>
                 </Container>
