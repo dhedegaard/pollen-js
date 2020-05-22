@@ -4,6 +4,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "prebuild": "rimraf ./build",
     "build": "tsc",
     "watch": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "start": "tsc && node ./build/index.js"
