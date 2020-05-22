@@ -1,13 +1,14 @@
 {
-    "name": "Pollen",
-    "short_name": "Pollen",
-    "display": "standalone",
-    "background_color": "#FFFFFF",
-    "icons": [
-        {
-            "src": "/static/favicon.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        }
-    ]
+  "name": "Pollen",
+  "short_name": "Pollen",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#8bc34a",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
 }

@@ -29,19 +29,19 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Roboto";
     font-weight: 400;
     font-display: swap;
-    src: url('/static/fonts/roboto-latin-400.woff2') format('woff2');
+    src: url('/fonts/roboto-latin-400.woff2') format('woff2');
   }
   @font-face {
     font-family: "Roboto";
     font-weight: 500;
     font-display: swap;
-    src: url('/static/fonts/roboto-latin-500.woff2') format('woff2');
+    src: url('/fonts/roboto-latin-500.woff2') format('woff2');
   }
   @font-face {
     font-family: "Roboto";
     font-weight: 700;
     font-display: swap;
-    src: url('/static/fonts/roboto-latin-700.woff2') format('woff2');
+    src: url('/fonts/roboto-latin-700.woff2') format('woff2');
   }
 `
 
@@ -89,11 +89,11 @@ const Index: React.FC<Props> = (props) => {
           <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
           <meta property="og:title" content="Pollen" />
           <meta property="og:description" content={description} />
-          <meta property="og:image" content="/static/favicon.png" />
+          <meta property="og:image" content="/favicon.png" />
           <title>Pollen</title>
-          <link rel="shortcut icon" href="/static/favicon.ico" />
-          <link rel="manifest" href="/static/manifest.json" />
-          <link rel="apple-touch-icon" href="/static/favicon.png" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="apple-touch-icon" href="/favicon.png" />
         </head>
         <body>
           <Box mb={2}>
@@ -178,6 +178,19 @@ const Index: React.FC<Props> = (props) => {
           </Container>
         </body>
       </html>
+      <script
+        type="text/javascript"
+        dangerouslySetInnerHTML={{
+          __html: `
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+          });
+        }
+
+        `,
+        }}
+      />
     </ThemeProvider>
   )
 }
