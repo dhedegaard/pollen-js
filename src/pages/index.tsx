@@ -90,11 +90,11 @@ const Index: React.FC<Props> = (props) => {
           <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
           <meta property="og:title" content="Pollen" />
           <meta property="og:description" content={description} />
-          <meta property="og:image" content="/favicon.png" />
+          <meta property="og:image" content="/favicon-256.png" />
           <title>Pollen</title>
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/favicon.png" />
+          <link rel="apple-touch-icon" href="/favicon-256.png" />
         </head>
         <body>
           <Box mb={2}>

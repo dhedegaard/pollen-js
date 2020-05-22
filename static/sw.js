@@ -5,8 +5,7 @@ importScripts(
 // Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
 workbox.routing.registerRoute(
   ({ url }) =>
-    url.pathname.startsWith('/fonts') ||
-    url.pathname.startsWith('/favicon.ico'),
+    url.pathname.startsWith('/fonts') || url.pathname.startsWith('/favicon'),
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'google-fonts-stylesheets',
   })
