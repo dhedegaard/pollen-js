@@ -81,6 +81,7 @@ const Index: React.FC<Props> = (props) => {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+          <link rel="preconnect" href="https://storage.googleapis.com" />
           <meta name="theme-color" content="#FFFFFF" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -187,8 +188,7 @@ const Index: React.FC<Props> = (props) => {
             navigator.serviceWorker.register('/sw.js');
           });
         }
-
-        `,
+        `.trim(),
         }}
       />
     </ThemeProvider>
