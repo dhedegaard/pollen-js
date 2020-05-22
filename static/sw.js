@@ -5,7 +5,9 @@ importScripts(
 // Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
 workbox.routing.registerRoute(
   ({ url }) =>
-    url.pathname.startsWith('/fonts') || url.pathname.startsWith('/favicon'),
+    url.pathname.startsWith('/fonts') ||
+    url.pathname.startsWith('/favicon') ||
+    url.pathname === '/manifest.json',
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'google-fonts-stylesheets',
   })
@@ -13,9 +15,6 @@ workbox.routing.registerRoute(
 
 // Use network first for the rest.
 workbox.routing.registerRoute(
-  ({ url }) =>
-    url.pathname === '/' ||
-    url.pathname === '/index.html' ||
-    url.pathname === '/manifest.json',
+  ({ url }) => url.pathname === '/' || url.pathname === '/index.html',
   new workbox.strategies.NetworkFirst()
 )
