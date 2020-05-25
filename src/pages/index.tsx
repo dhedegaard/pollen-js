@@ -82,7 +82,7 @@ const Index: React.FC<Props> = (props) => {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <link rel="preconnect" href="https://storage.googleapis.com" />
-          <meta name="theme-color" content="#FFFFFF" />
+          <meta name="theme-color" content="#8bc34a" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="description" content={description} />
