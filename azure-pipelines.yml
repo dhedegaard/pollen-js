@@ -8,6 +8,7 @@ steps:
 
 - task: Docker@2
   displayName: 'Build and push docker-image'
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
   inputs:
     containerRegistry: 'docker-hub'
     repository: 'dhedegaard/pollen-js'
@@ -17,6 +18,7 @@ steps:
 
 - task: SSH@0
   displayName: 'Deploy new container'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   timeoutInMinutes: 10
   inputs:
     sshEndpoint: 'dennis@ymir'
