@@ -14,7 +14,6 @@ app.get('/', async (request, response) =>
 )
 
 app.use('/', express.static('static'))
-app.use('/fonts', express.static('node_modules/typeface-roboto/files'))
 
 api(app)
 

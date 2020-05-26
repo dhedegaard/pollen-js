@@ -10,9 +10,5 @@ module.exports = {
       urlPattern: /\/$/,
       handler: 'NetworkFirst',
     },
-    {
-      urlPattern: /.woff2$/,
-      handler: 'CacheFirst',
-    },
   ],
 }

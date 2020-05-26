@@ -62,3 +62,4 @@ node_modules
 
 static/sw.js*
 static/workbox*
+static/fonts

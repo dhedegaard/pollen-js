@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "prebuild": "rimraf ./build",
-    "build": "tsc",
+    "build": "tsc && copyfiles --up 3 node_modules/typeface-roboto/files/roboto-latin-{400,500,700}.woff2 static/fonts",
     "postbuild": "workbox generateSW workbox-config.js",
     "watch": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "start": "tsc && node ./build/index.js"
@@ -38,6 +38,7 @@
     "@types/react-dom": "^16.9.6",
     "@types/styled-components": "4.1.8",
     "@types/xml2js": "^0.4.5",
+    "copyfiles": "^2.2.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
