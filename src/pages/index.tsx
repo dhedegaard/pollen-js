@@ -182,13 +182,8 @@ const Index: React.FC<Props> = (props) => {
       <script
         type="text/javascript"
         dangerouslySetInnerHTML={{
-          __html: `
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js');
-          });
-        }
-        `.trim(),
+          __html:
+            '"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")});',
         }}
       />
     </ThemeProvider>
