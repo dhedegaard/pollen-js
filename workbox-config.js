@@ -4,7 +4,6 @@ module.exports = {
   swDest: 'static/sw.js',
   clientsClaim: true,
   skipWaiting: true,
-  mode: 'development',
   runtimeCaching: [
     {
       urlPattern: /\/$/,
