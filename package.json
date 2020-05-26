@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild": "rimraf ./build",
     "build": "tsc",
+    "postbuild": "workbox generateSW workbox-config.js",
     "watch": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "start": "tsc && node ./build/index.js"
   },
@@ -39,6 +40,7 @@
     "@types/xml2js": "^0.4.5",
     "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^6.1.1",
-    "tslint-config-prettier": "^1.18.0"
+    "tslint-config-prettier": "^1.18.0",
+    "workbox-cli": "^5.1.3"
   }
 }
