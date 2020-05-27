@@ -83,12 +83,12 @@ const Index: React.FC<Props> = (props) => {
           />
           <link rel="preconnect" href="https://storage.googleapis.com" />
           <meta name="theme-color" content="#8bc34a" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="black-translucent"
           />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="description" content={description} />
           <meta property="og:site_name" content="Pollen" />
           <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
