@@ -50,7 +50,10 @@ export interface ParsedXMLStructure {
   forecast: string
 }
 
-const parseXMLStructure = function*(
+const preprocessForecase = (forecast: string): string =>
+  forecast.replace(/&?gt;/g, '>').replace(/&?lt;/g, '<')
+
+const parseXMLStructure = function* (
   xml: any
 ): IterableIterator<ParsedXMLStructure> {
   for (const region of xml.pollen_info.region) {
@@ -72,12 +75,12 @@ const parseXMLStructure = function*(
         },
         {}
       ),
-      forecast: region.forecast[0]
+      forecast: preprocessForecase(region.forecast[0]),
     }
   }
 }
 
-export const fetchAndParse = async function() {
+export const fetchAndParse = async function () {
   const data = await fetchData()
   const parsedXml = await parseData(data)
   const result = []
