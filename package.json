@@ -1,14 +1,16 @@
 {
   "name": "pollen",
-  "version": "1.0.0",
-  "main": "index.js",
-  "private": true,
+  "version": "0.1.0",
+  "main": "build/index.js",
+  "license": "GPL-3.0-or-later",
+  "private": false,
   "scripts": {
     "prebuild": "rimraf ./build",
     "build": "tsc && copyfiles --up 3 node_modules/typeface-roboto/files/roboto-latin-{400,500,700}.woff2 static/fonts",
     "postbuild": "workbox generateSW workbox-config.js",
     "watch": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
-    "start": "tsc && node ./build/index.js"
+    "start": "tsc && node ./build/index.js",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -36,7 +38,7 @@
     "@types/pug": "^2.0.4",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
-    "@types/styled-components": "5.1.2",
+    "@types/styled-components": "^5.1.9",
     "@types/xml2js": "^0.4.5",
     "copyfiles": "^2.3.0",
     "ts-node-dev": "^1.0.0-pre.61",

@@ -1,0 +1,14 @@
+src
+.dockerignore
+.gitignore
+.npmignore
+.prettierrc.js
+azure-pipelines.yml
+codeql-analysis.yml
+Dockerfile
+README.md
+tslint.json
+workbox*
+.github
+tsconfig.json
+static

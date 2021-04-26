@@ -7,7 +7,7 @@ export let data: PromiseType<ReturnType<typeof fetchAndParse>> | undefined
 export let cacheTimestamp: Date | undefined
 export let renderedData: string
 
-const refreshData = async () => {
+export const refreshData = async () => {
   renderedData = renderDataToHTML(undefined, undefined)
   console.log('Refreshing data.')
   try {
@@ -15,11 +15,14 @@ const refreshData = async () => {
     cacheTimestamp = new Date()
     // Re-render some new markup.
     renderedData = renderDataToHTML(data, cacheTimestamp)
+    return renderedData
   } catch (error) {
     console.log('Error refreshing data:')
     console.error(error)
   }
 }
 
-setInterval(refreshData, 10 * 60 * 1000)
-refreshData()
+if (require.main === module) {
+  setInterval(refreshData, 10 * 60 * 1000)
+  refreshData()
+}
