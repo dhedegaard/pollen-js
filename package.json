@@ -1,6 +1,6 @@
 {
-  "name": "pollen",
-  "version": "0.1.0",
+  "name": "@dhedegaard/pollen",
+  "version": "0.1.1",
   "main": "build/index.js",
   "license": "GPL-3.0-or-later",
   "private": false,
