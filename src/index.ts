@@ -11,10 +11,12 @@ export const refreshData = async () => {
   renderedData = renderDataToHTML(undefined, undefined)
   console.log('Refreshing data.')
   try {
-    data = await fetchAndParse()
+    const innerData = await fetchAndParse()
+    // Re-render the markup.
+    renderedData = renderDataToHTML(innerData, cacheTimestamp)
+    // Mark the global state as new.
     cacheTimestamp = new Date()
-    // Re-render some new markup.
-    renderedData = renderDataToHTML(data, cacheTimestamp)
+    data = innerData
     return renderedData
   } catch (error) {
     console.log('Error refreshing data:')
