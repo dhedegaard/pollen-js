@@ -1,5 +1,5 @@
 import express from 'express'
-import { renderedData } from '.'
+import { data, renderedData } from '.'
 import api from './api'
 import helmet from 'helmet'
 import morgan from 'morgan'
@@ -20,9 +20,13 @@ app.use(
 )
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'short'))
 
-app.get('/', async (_request, response) =>
-  response.contentType('html').end(renderedData)
-)
+app.get('/', async (_request, response) => {
+  // If the data is not available yet, wait for it to exist before returning a response.
+  while (data == null) {
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+  return response.contentType('html').end(renderedData)
+})
 
 app.use('/', express.static('static'))
 
