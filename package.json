@@ -8,7 +8,7 @@
     "prebuild": "rimraf ./build",
     "build": "tsc && copyfiles --up 3 node_modules/typeface-roboto/files/roboto-latin-{400,500,700}.woff2 static/fonts",
     "postbuild": "workbox generateSW workbox-config.js",
-    "watch": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "watch": "ts-node-dev --respawn -T ./src/index.ts",
     "start": "tsc && node ./build/index.js",
     "prepublishOnly": "yarn build"
   },
