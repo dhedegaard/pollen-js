@@ -9,7 +9,7 @@ const app = express()
 app.use(helmet())
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'short'))
 
-app.get('/', async (request, response) =>
+app.get('/', async (_request, response) =>
   response.contentType('html').end(renderedData)
 )
 
