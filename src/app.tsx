@@ -6,7 +6,18 @@ import morgan from 'morgan'
 
 const app = express()
 
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        'default-src': "'self'",
+        'script-src': "'unsafe-inline' 'self'",
+        'img-src': "'self' data:",
+        'style-src': "'unsafe-inline'",
+      },
+    },
+  })
+)
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'short'))
 
 app.get('/', async (_request, response) =>
