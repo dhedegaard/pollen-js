@@ -3,6 +3,7 @@ import { data, renderedData } from '.'
 import api from './api'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import compression from 'compression'
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(
     },
   })
 )
+app.use(compression())
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'short'))
 
 app.get('/', async (_request, response) => {
