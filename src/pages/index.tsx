@@ -167,10 +167,7 @@ const Index: React.FC<Props> = (props) => {
                     <br />
                   </>
                 )}
-                <Link color="secondary" href="/graphql">
-                  Click here for an API
-                </Link>
-                , get the source on{' '}
+                Get the source on{' '}
                 <Link
                   color="secondary"
                   href="https://github.com/dhedegaard/pollen-js"
