@@ -9,7 +9,6 @@ import {
   Toolbar,
   colors,
   ThemeProvider,
-  createMuiTheme,
   Grid,
   Box,
   Card,
@@ -21,6 +20,7 @@ import {
   Table,
   Link,
 } from '@material-ui/core'
+import { createMuiTheme } from '@material-ui/core/styles'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Logo } from '../components/Logo'
 
