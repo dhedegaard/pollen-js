@@ -20,7 +20,7 @@ import {
   Table,
   Link,
 } from '@material-ui/core'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 import styled, { createGlobalStyle } from 'styled-components'
 import { Logo } from '../components/Logo'
 
@@ -65,7 +65,7 @@ const Index: React.FC<Props> = (props) => {
     props.data?.map((e) => `${e.city}: ${e.forecast}`).join(' - ') ?? ''
   return (
     <ThemeProvider
-      theme={createMuiTheme({
+      theme={createTheme({
         palette: {
           primary: colors.lightGreen,
           secondary: colors.blue,
