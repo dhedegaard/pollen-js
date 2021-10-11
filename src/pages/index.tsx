@@ -49,6 +49,7 @@ const SizedTypography = styled(Typography)<{
   fontSize: React.CSSProperties['fontSize']
 }>`
   font-size: ${(p) => p.fontSize};
+  word-break: break-word;
 `
 
 const HeaderTypography = styled(Typography)`
