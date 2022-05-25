@@ -5,5 +5,9 @@ import Index from './pages'
 export const renderDataToHTML = (
   data: ParsedXMLStructure[] | undefined,
   cacheTimestamp: Date | undefined
-): string =>
-  renderToString(<Index data={data} cacheTimestamp={cacheTimestamp} />)
+): string => {
+  const html = renderToString(
+    <Index data={data} cacheTimestamp={cacheTimestamp} />
+  )
+  return `<!doctype html>${html}`
+}
