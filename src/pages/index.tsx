@@ -175,8 +175,11 @@ const Index: FC<Props> = (props) => {
                 )}
                 Get the source on{' '}
                 <Link
-                  color="secondary"
+                  color="#000000de"
+                  variant="body2"
                   href="https://github.com/dhedegaard/pollen-js"
+                  target="_blank"
+                  rel="noreferrer noopener"
                 >
                   Github
                 </Link>
