@@ -1,6 +1,6 @@
 import { ParsedXMLStructure } from './parser'
 import { ServerStyleSheets } from '@material-ui/core'
-import ReactDOMServer from 'react-dom/server'
+import { renderToString } from 'react-dom/server'
 import React from 'react'
 import Index from './pages'
 import { minify } from 'csso'
@@ -15,7 +15,7 @@ export const renderDataToHTML = (
 
   try {
     // Render the HTML, capture the CSS for later.
-    const html = ReactDOMServer.renderToString(
+    const html = renderToString(
       sheets.collect(
         styledSheets.collectStyles(
           <Index data={data} cacheTimestamp={cacheTimestamp} />
