@@ -1,10 +1,10 @@
-import React from 'react'
-import { Box } from '@material-ui/core'
+import { FC } from 'react'
+import { Box } from '@mui/material'
 
 type Props = {
   value: string | number | undefined
 }
-const ValueItem: React.FC<Props> = ({ value }) => {
+const ValueItem: FC<Props> = ({ value }) => {
   if (value == null) {
     return (
       <Box component="span" color="text.secondary">

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ParsedXMLStructure } from '../parser'
 import ValueItem from '../components/ValueItem'
 import {
@@ -19,34 +18,40 @@ import {
   TableBody,
   Table,
   Link,
-} from '@material-ui/core'
-import { createTheme } from '@material-ui/core/styles'
-import styled, { createGlobalStyle } from 'styled-components'
+} from '@mui/material'
+import { createTheme } from '@mui/material/styles'
+import styled from '@emotion/styled'
+import { css, Global } from '@emotion/react'
 import { Logo } from '../components/Logo'
+import { CSSProperties, FC } from 'react'
 
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: "Roboto";
-    font-weight: 400;
-    font-display: swap;
-    src: url('/fonts/roboto-latin-400.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: "Roboto";
-    font-weight: 500;
-    font-display: swap;
-    src: url('/fonts/roboto-latin-500.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: "Roboto";
-    font-weight: 700;
-    font-display: swap;
-    src: url('/fonts/roboto-latin-700.woff2') format('woff2');
-  }
-`
+const GlobalStyle = () => (
+  <Global
+    styles={css`
+      @font-face {
+        font-family: 'Roboto';
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/roboto-latin-400.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-display: swap;
+        src: url('/fonts/roboto-latin-500.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/roboto-latin-700.woff2') format('woff2');
+      }
+    `}
+  />
+)
 
 const SizedTypography = styled(Typography)<{
-  fontSize: React.CSSProperties['fontSize']
+  fontSize: CSSProperties['fontSize']
 }>`
   font-size: ${(p) => p.fontSize};
   word-break: break-word;
@@ -61,7 +66,7 @@ type Props = {
   data: ParsedXMLStructure[] | undefined
   cacheTimestamp: Date | undefined
 }
-const Index: React.FC<Props> = (props) => {
+const Index: FC<Props> = (props) => {
   const description =
     props.data?.map((e) => `${e.city}: ${e.forecast}`).join(' - ') ?? ''
   return (
