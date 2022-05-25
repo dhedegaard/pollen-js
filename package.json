@@ -4,6 +4,10 @@
   "main": "build/index.js",
   "license": "GPL-3.0-or-later",
   "private": false,
+  "engines": {
+    "node": ">=16",
+    "yarn": "1"
+  },
   "scripts": {
     "prebuild": "rimraf ./build",
     "build": "tsc && copyfiles --up 3 node_modules/typeface-roboto/files/roboto-latin-{400,500,700}.woff2 static/fonts",
