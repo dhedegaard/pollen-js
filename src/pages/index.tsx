@@ -92,7 +92,7 @@ const Index: FC<Props> = (props) => {
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
-            content="black-translucent"
+            content="black"
           />
           <meta name="description" content={description} />
           <meta property="og:site_name" content="Pollen" />
