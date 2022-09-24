@@ -1,36 +1,44 @@
-import Axios from 'axios'
-import 'xml2js'
+import * as yup from 'yup'
 import { parseString } from 'xml2js'
 
 const APIURL =
   'https://dmi.dk/dmidk_byvejrWS/rest/texts/forecast/pollen/Danmark'
 
-type ApiResponse = Array<{
-  name: string
-  language: string
-  products: {
-    timestamp: number
-    text_type: string
-    text_format: string
-    // XML data
-    text: string
-    varnishURL: string
-  }
-}>
+const apiResponseSchema = yup
+  .array()
+  .of(
+    yup.object({
+      products: yup
+        .object({
+          text: yup.string().required(),
+        })
+        .required()
+        .defined(),
+    })
+  )
+  .min(1)
+
+type ApiResponse = yup.TypeOf<typeof apiResponseSchema>
 
 const fetchData = async (): Promise<ApiResponse> => {
-  const resp = await Axios.get<ApiResponse>(APIURL)
-  if (resp.status < 200 || resp.status >= 400) {
-    throw new Error('Unclean RC: ' + resp.status)
-  }
-  return resp.data
+  return await fetch(APIURL)
+    .then((resp) => {
+      if (!resp.ok) {
+        throw new Error(`Unclean RC: ${resp.status} ${resp.statusText}`)
+      }
+      return resp.json()
+    })
+    .then((data: unknown) => apiResponseSchema.validate(data))
 }
 
 const parseData = async (apiResponse: ApiResponse) => {
-  if (apiResponse.length === 0) {
-    throw new Error('No elements in the api response.')
+  if (apiResponse == null) {
+    throw new Error('No data')
   }
   const xml = apiResponse[0].products.text
+  if (xml == null) {
+    throw new Error('No XML')
+  }
   return await parseXml(xml)
 }
 
