@@ -1,24 +1,20 @@
-import * as yup from 'yup'
+import { z } from 'zod'
 import { parseString } from 'xml2js'
 
 const APIURL =
   'https://dmi.dk/dmidk_byvejrWS/rest/texts/forecast/pollen/Danmark'
 
-const apiResponseSchema = yup
-  .array()
-  .of(
-    yup.object({
-      products: yup
-        .object({
-          text: yup.string().required(),
-        })
-        .required()
-        .defined(),
+const ApiResponse = z
+  .array(
+    z.object({
+      products: z.object({
+        text: z.string().min(1),
+      }),
     })
   )
   .min(1)
 
-type ApiResponse = yup.TypeOf<typeof apiResponseSchema>
+type ApiResponse = z.infer<typeof ApiResponse>
 
 const fetchData = async (): Promise<ApiResponse> => {
   return await fetch(APIURL)
@@ -28,7 +24,7 @@ const fetchData = async (): Promise<ApiResponse> => {
       }
       return resp.json()
     })
-    .then((data: unknown) => apiResponseSchema.validate(data))
+    .then((data: unknown) => ApiResponse.parseAsync(data))
 }
 
 const parseData = async (apiResponse: ApiResponse) => {
