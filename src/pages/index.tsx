@@ -76,6 +76,20 @@ const Index: FC<Props> = (props) => {
           primary: colors.lightGreen,
           secondary: colors.blue,
         },
+        typography: {
+          fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+          ].join(','),
+        },
       })}
     >
       <html lang="en" prefix="og: http://ogp.me/ns#">
@@ -90,10 +104,7 @@ const Index: FC<Props> = (props) => {
           <meta name="theme-color" content="#8bc34a" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta
-            name="apple-mobile-web-app-status-bar-style"
-            content="black"
-          />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="description" content={description} />
           <meta property="og:site_name" content="Pollen" />
           <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
