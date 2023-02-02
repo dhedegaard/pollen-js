@@ -21,34 +21,8 @@ import {
 } from '@mui/material'
 import { createTheme } from '@mui/material/styles'
 import styled from '@emotion/styled'
-import { css, Global } from '@emotion/react'
 import { Logo } from '../components/Logo'
 import { CSSProperties, FC } from 'react'
-
-const GlobalStyle = () => (
-  <Global
-    styles={css`
-      @font-face {
-        font-family: 'Roboto';
-        font-weight: 400;
-        font-display: swap;
-        src: url('/fonts/roboto-latin-400.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'Roboto';
-        font-weight: 500;
-        font-display: swap;
-        src: url('/fonts/roboto-latin-500.woff2') format('woff2');
-      }
-      @font-face {
-        font-family: 'Roboto';
-        font-weight: 700;
-        font-display: swap;
-        src: url('/fonts/roboto-latin-700.woff2') format('woff2');
-      }
-    `}
-  />
-)
 
 const SizedTypography = styled(Typography)<{
   fontSize: CSSProperties['fontSize']
@@ -94,7 +68,6 @@ const Index: FC<Props> = (props) => {
     >
       <html lang="en" prefix="og: http://ogp.me/ns#">
         <CssBaseline />
-        <GlobalStyle />
         <head>
           <meta charSet="utf-8" />
           <meta
