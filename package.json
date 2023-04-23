@@ -6,7 +6,7 @@
   "private": false,
   "engines": {
     "node": ">=18",
-    "yarn": "1"
+    "npm": ">=9"
   },
   "scripts": {
     "prebuild": "rimraf ./build",
@@ -14,7 +14,7 @@
     "postbuild": "workbox generateSW workbox-config.js",
     "watch": "tsx watch ./src/index.ts",
     "start": "tsc && node ./build/index.js",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
