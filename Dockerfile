@@ -5,12 +5,12 @@ WORKDIR /app
 EXPOSE 3000
 
 # Install dependencies.
-COPY package.json yarn.lock ./
-RUN yarn
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Build the app.
 COPY . ./
-RUN yarn build
+RUN npm run build
 
 # Run the app.
 ENV NODE_ENV=production
