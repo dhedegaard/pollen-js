@@ -179,6 +179,7 @@ const Index: FC<Props> = (props) => {
             '"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")});',
         }}
       />
+      <script type="module" src="/main.js" async></script>
     </ThemeProvider>
   )
 }
