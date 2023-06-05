@@ -1,5 +1,5 @@
-import { z } from 'zod'
 import { parseString } from 'xml2js'
+import { z } from 'zod'
 
 const APIURL =
   'https://dmi.dk/dmidk_byvejrWS/rest/texts/forecast/pollen/Danmark'
@@ -13,6 +13,29 @@ const ApiResponse = z
     })
   )
   .min(1)
+const xmlSchema = z.object({
+  pollen_info: z.object({
+    region: z.array(
+      z.object({
+        name: z.tuple([z.string()]),
+        forecast: z.tuple([z.string()]),
+        readings: z.tuple([
+          z.object({
+            reading: z.array(
+              z.object({
+                name: z.tuple([z.string()]),
+                value: z.tuple([
+                  z.union([z.literal('-'), z.string().regex(/^\d+$/)]),
+                ]),
+              })
+            ),
+          }),
+        ]),
+      })
+    ),
+    info: z.tuple([z.string()]),
+  }),
+})
 
 type ApiResponse = z.infer<typeof ApiResponse>
 
@@ -38,14 +61,13 @@ const parseData = async (apiResponse: ApiResponse) => {
   return await parseXml(xml)
 }
 
-const parseXml = (xml: string) =>
+const parseXml = (xml: string): Promise<z.TypeOf<typeof xmlSchema>> =>
   new Promise((resolve, reject) => {
-    parseString(xml, (error, data) => {
-      if (error != null) {
-        return reject(error)
-      }
-      return resolve(data)
-    })
+    parseString(xml, (error, data): unknown =>
+      error != null
+        ? reject(error)
+        : xmlSchema.parseAsync(data).then((result) => resolve(result))
+    )
   })
 
 export interface ParsedXMLStructure {
@@ -58,27 +80,23 @@ const preprocessForecase = (forecast: string): string =>
   forecast.replace(/&?gt;/g, '>').replace(/&?lt;/g, '<')
 
 const parseXMLStructure = function* (
-  xml: any
+  xml: z.TypeOf<typeof xmlSchema>
 ): IterableIterator<ParsedXMLStructure> {
   for (const region of xml.pollen_info.region) {
     yield {
       city: region.name[0],
-      values: region.readings[0].reading.reduce(
-        (
-          obj: { [key: string]: number | string | undefined },
-          elem: { name: string; value: string }
-        ) => {
-          const value = elem.value[0]
-          obj[elem.name] =
-            value === '-'
-              ? undefined
-              : !/\d+/.test(value)
-              ? value
-              : parseInt(value, 10)
-          return obj
-        },
-        {}
-      ),
+      values: region.readings[0].reading.reduce<{
+        [key: string]: number | string | undefined
+      }>((obj, elem) => {
+        const [value] = elem.value
+        obj[elem.name[0]] =
+          value === '-'
+            ? undefined
+            : !/\d+/.test(value)
+            ? value
+            : parseInt(value, 10)
+        return obj
+      }, {}),
       forecast: preprocessForecase(region.forecast[0]),
     }
   }
