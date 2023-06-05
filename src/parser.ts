@@ -1,4 +1,4 @@
-import { parseString } from 'xml2js'
+import { parseStringPromise } from 'xml2js'
 import { z } from 'zod'
 
 const APIURL =
@@ -61,14 +61,10 @@ const parseData = async (apiResponse: ApiResponse) => {
   return await parseXml(xml)
 }
 
-const parseXml = (xml: string): Promise<z.TypeOf<typeof xmlSchema>> =>
-  new Promise((resolve, reject) => {
-    parseString(xml, (error, data): unknown =>
-      error != null
-        ? reject(error)
-        : xmlSchema.parseAsync(data).then((result) => resolve(result))
-    )
-  })
+const parseXml = async (xml: string): Promise<z.TypeOf<typeof xmlSchema>> => {
+  const data = await parseStringPromise(xml)
+  return xmlSchema.parseAsync(data)
+}
 
 export interface ParsedXMLStructure {
   city: string
