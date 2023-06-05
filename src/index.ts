@@ -21,6 +21,7 @@ export const refreshData = async () => {
   } catch (error) {
     console.log('Error refreshing data:')
     console.error(error)
+    throw error
   }
 }
 

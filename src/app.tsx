@@ -20,7 +20,7 @@ app.use(
   })
 )
 app.use(compression())
-app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'short'))
+app.use(morgan(process.env['NODE_ENV'] === 'development' ? 'dev' : 'short'))
 
 app.get('/', async (_request, response) => {
   // If the data is not available yet, wait for it to exist before returning a response.
@@ -34,5 +34,5 @@ app.use('/', express.static('static'))
 
 api(app)
 
-const port = process.env.PORT || 3000
+const port = process.env['PORT'] || 3000
 app.listen(port, () => console.log(`Listening on port: ${port}`))

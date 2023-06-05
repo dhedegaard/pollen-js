@@ -54,7 +54,7 @@ const parseData = async (apiResponse: ApiResponse) => {
   if (apiResponse == null) {
     throw new Error('No data')
   }
-  const xml = apiResponse[0].products.text
+  const xml = apiResponse[0]?.products.text
   if (xml == null) {
     throw new Error('No XML')
   }
