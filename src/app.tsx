@@ -1,9 +1,9 @@
+import compression from 'compression'
 import express from 'express'
-import { data, renderedData } from '.'
-import api from './api'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import compression from 'compression'
+import { data, renderedData } from '.'
+import api from './api'
 
 const app = express()
 
@@ -28,6 +28,14 @@ app.get('/', async (_request, response) => {
     await new Promise((resolve) => setTimeout(resolve, 100))
   }
   return response.contentType('html').end(renderedData)
+})
+
+app.get('/data', async (_request, response) => {
+  // If the data is not available yet, wait for it to exist before returning a response.
+  while (data == null) {
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+  return response.json(data)
 })
 
 app.use('/', express.static('static'))
