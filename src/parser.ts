@@ -1,3 +1,4 @@
+import { inspect } from 'util'
 import { parseStringPromise } from 'xml2js'
 import { z } from 'zod'
 
@@ -25,7 +26,10 @@ const xmlSchema = z.object({
               z.object({
                 name: z.tuple([z.string()]),
                 value: z.tuple([
-                  z.union([z.literal('-'), z.string().regex(/^\d+$/)]),
+                  z.union([
+                    z.literal('-'),
+                    z.string().regex(/^\d+(?:\s\D+)?$/),
+                  ]),
                 ]),
               })
             ),
@@ -63,7 +67,10 @@ const parseData = async (apiResponse: ApiResponse) => {
 
 const parseXml = async (xml: string): Promise<z.TypeOf<typeof xmlSchema>> => {
   const data = await parseStringPromise(xml)
-  return xmlSchema.parseAsync(data)
+  return xmlSchema.parseAsync(data).catch((error) => {
+    console.error('Data:', inspect(data, false, Infinity, true))
+    throw error
+  })
 }
 
 export interface ParsedXMLStructure {
@@ -88,7 +95,7 @@ const parseXMLStructure = function* (
         obj[elem.name[0]] =
           value === '-'
             ? undefined
-            : !/\d+/.test(value)
+            : !/^\d+/.test(value)
             ? value
             : parseInt(value, 10)
         return obj
