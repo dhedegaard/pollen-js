@@ -68,7 +68,6 @@ const parseData = async (apiResponse: ApiResponse) => {
 const parseXml = async (xml: string): Promise<z.TypeOf<typeof xmlSchema>> => {
   const data = await parseStringPromise(xml)
   return xmlSchema.parseAsync(data).catch((error) => {
-    console.error('Data:', inspect(data, false, Infinity, true))
     throw error
   })
 }
@@ -93,7 +92,6 @@ const parseXMLStructure = function* (
       }>((obj, elem) => {
         const [name] = elem.name
         const [value] = elem.value
-        console.log(name, value)
         obj[name] =
           value === '-'
             ? null
