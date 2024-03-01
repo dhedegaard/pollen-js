@@ -89,12 +89,14 @@ const parseXMLStructure = function* (
     yield {
       city: region.name[0],
       values: region.readings[0].reading.reduce<{
-        [key: string]: number | string | undefined
+        [key: string]: number | string | null
       }>((obj, elem) => {
+        const [name] = elem.name
         const [value] = elem.value
-        obj[elem.name[0]] =
+        console.log(name, value)
+        obj[name] =
           value === '-'
-            ? undefined
+            ? null
             : !/^\d+/.test(value)
             ? value
             : parseInt(value, 10)
