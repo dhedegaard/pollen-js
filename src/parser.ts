@@ -1,4 +1,3 @@
-import { inspect } from 'util'
 import { parseStringPromise } from 'xml2js'
 import { z } from 'zod'
 
@@ -68,14 +67,13 @@ const parseData = async (apiResponse: ApiResponse) => {
 const parseXml = async (xml: string): Promise<z.TypeOf<typeof xmlSchema>> => {
   const data = await parseStringPromise(xml)
   return xmlSchema.parseAsync(data).catch((error) => {
-    console.error('Data:', inspect(data, false, Infinity, true))
     throw error
   })
 }
 
 export interface ParsedXMLStructure {
   city: string
-  values: { [key: string]: number | string | undefined }
+  values: { [key: string]: number | string | null }
   forecast: string
 }
 
@@ -89,12 +87,13 @@ const parseXMLStructure = function* (
     yield {
       city: region.name[0],
       values: region.readings[0].reading.reduce<{
-        [key: string]: number | string | undefined
+        [key: string]: number | string | null
       }>((obj, elem) => {
+        const [name] = elem.name
         const [value] = elem.value
-        obj[elem.name[0]] =
+        obj[name] =
           value === '-'
-            ? undefined
+            ? null
             : !/^\d+/.test(value)
             ? value
             : parseInt(value, 10)
@@ -109,7 +108,7 @@ export const fetchAndParse = async function () {
   const data = await fetchData()
   const parsedXml = await parseData(data)
   const result = []
-  for (const elem of parseXMLStructure(parsedXml)) {
+  for (const elem of Array.from(parseXMLStructure(parsedXml))) {
     result.push(elem)
   }
   return result
