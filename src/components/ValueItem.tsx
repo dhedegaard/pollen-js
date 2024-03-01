@@ -1,8 +1,8 @@
-import { FC } from 'react'
 import { Box } from '@mui/material'
+import { FC } from 'react'
 
 type Props = {
-  value: string | number | undefined
+  value: string | number | null
 }
 const ValueItem: FC<Props> = ({ value }) => {
   if (value == null) {
