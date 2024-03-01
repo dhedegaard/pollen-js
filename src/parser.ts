@@ -1,4 +1,3 @@
-import { inspect } from 'util'
 import { parseStringPromise } from 'xml2js'
 import { z } from 'zod'
 
