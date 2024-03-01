@@ -28,7 +28,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@tsconfig/node-lts": "^20.1.1",
+    "@tsconfig/next": "^2.0.1",
     "@tsconfig/strictest": "^2.0.3",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",

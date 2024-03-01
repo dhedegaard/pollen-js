@@ -111,7 +111,7 @@ export const fetchAndParse = async function () {
   const data = await fetchData()
   const parsedXml = await parseData(data)
   const result = []
-  for (const elem of parseXMLStructure(parsedXml)) {
+  for (const elem of Array.from(parseXMLStructure(parsedXml))) {
     result.push(elem)
   }
   return result
