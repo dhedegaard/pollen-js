@@ -75,7 +75,7 @@ const parseXml = async (xml: string): Promise<z.TypeOf<typeof xmlSchema>> => {
 
 export interface ParsedXMLStructure {
   city: string
-  values: { [key: string]: number | string | undefined }
+  values: { [key: string]: number | string | null }
   forecast: string
 }
 
