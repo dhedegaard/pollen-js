@@ -6,7 +6,6 @@ import {
   Box,
   Card,
   Container,
-  CssBaseline,
   Grid,
   Link,
   Table,
@@ -66,7 +65,6 @@ const ClientRootPage: FC<Props> = (props) => {
         },
       })}
     >
-      <CssBaseline />
       <Box mb={2}>
         <AppBar position="static" color="primary">
           <Toolbar variant="dense">
