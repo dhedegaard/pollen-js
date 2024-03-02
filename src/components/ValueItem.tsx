@@ -1,41 +1,28 @@
-import { Box } from '@mui/material'
-import { FC } from 'react'
+import clsx from 'clsx'
 
 type Props = {
   value: string | number | null
 }
-const ValueItem: FC<Props> = ({ value }) => {
-  if (value == null) {
-    return (
-      <Box component="span" color="text.secondary">
-        -
-      </Box>
-    )
+export function ValueItem({ value }: Props) {
+  if (value == null || (typeof value === 'number' && value < 1)) {
+    return <span className="text-slate-600">-</span>
   }
   if (typeof value === 'string') {
-    return (
-      <Box component="span" color="warning.main">
-        {value}
-      </Box>
-    )
+    return <span className="text-red-600">{value}</span>
   }
-  if (value < 1) {
-    return (
-      <Box component="span" color="text.secondary">
-        {value.toString()}
-      </Box>
-    )
-  }
+
   return (
-    <Box
-      component="b"
-      color={
-        value < 21 ? 'success.main' : value < 51 ? 'warning.main' : 'error.dark'
-      }
+    <span
+      className={clsx(
+        'font-bold',
+        value < 21
+          ? 'text-green-600'
+          : value < 51
+          ? 'text-yellow-600'
+          : 'text-red-600'
+      )}
     >
       {value.toString()}
-    </Box>
+    </span>
   )
 }
-
-export default ValueItem

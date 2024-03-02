@@ -1,4 +1,5 @@
 import { fetchAndParse } from '../parser'
+import '../styles/global.css'
 import ClientRootPage from './page.client'
 
 export const revalidate = 600

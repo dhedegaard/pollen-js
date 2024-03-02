@@ -23,7 +23,7 @@ import {
 import { createTheme } from '@mui/material/styles'
 import { CSSProperties, FC } from 'react'
 import { Logo } from '../components/Logo'
-import ValueItem from '../components/ValueItem'
+import { ValueItem } from '../components/ValueItem'
 import { ParsedXMLStructure } from '../parser'
 
 const SizedTypography = styled(Typography)<{
