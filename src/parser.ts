@@ -104,7 +104,7 @@ const parseXMLStructure = function* (
   }
 }
 
-export const fetchAndParse = async function () {
+export async function fetchAndParse() {
   const data = await fetchData()
   const parsedXml = await parseData(data)
   const result = []

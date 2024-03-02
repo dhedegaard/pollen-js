@@ -4,5 +4,10 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  /** @type {import('daisyui').Config} */
+  daisyui: {
+    logs: false,
+    themes: ['light'],
+  },
 }
