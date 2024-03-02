@@ -1,9 +1,19 @@
+import { Metadata } from 'next'
 import { ReactNode } from 'react'
 import '../styles/global.css'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Pollen',
   description: 'Pollen',
+  manifest: '/manifest.json',
+  robots: { index: true, follow: true },
+  openGraph: {
+    siteName: 'Pollen',
+    url: 'https://pollen.dhedegaard.dk/',
+    title: 'Pollen',
+    type: 'website',
+    images: [{ url: '/favicon-256.png' }],
+  },
 }
 
 interface Props {
@@ -22,13 +32,7 @@ export default function RootLayout({ children }: Props) {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta property="og:site_name" content="Pollen" />
-        <meta property="og:url" content="https://pollen.dhedegaard.dk/" />
-        <meta property="og:title" content="Pollen" />
-        <meta property="og:image" content="/favicon-256.png" />
-        <title>Pollen</title>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/favicon-256.png" />
       </head>
       <body>{children}</body>
