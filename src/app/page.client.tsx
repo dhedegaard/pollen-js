@@ -32,11 +32,6 @@ const SizedTypography = styled(Typography)<{
   word-break: break-word;
 `
 
-const HeaderTypography = styled(Typography)`
-  display: flex;
-  align-items: center;
-`
-
 type Props = {
   data: ParsedXMLStructure[] | undefined
   cacheTimestamp: Date | undefined
@@ -69,10 +64,10 @@ const ClientRootPage: FC<Props> = (props) => {
         <AppBar position="static" color="primary">
           <Toolbar variant="dense">
             <Container>
-              <HeaderTypography variant="h6">
+              <h1 className="flex items-center text-xl gap-1 tracking-wide">
                 <Logo />
                 <span>Pollen</span>
-              </HeaderTypography>
+              </h1>
             </Container>
           </Toolbar>
         </AppBar>
