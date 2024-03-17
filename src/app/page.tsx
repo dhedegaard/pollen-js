@@ -1,11 +1,13 @@
+import { use } from 'react'
 import { CityElement } from '../components/CityElement'
 import { Logo } from '../components/Logo'
 import { fetchAndParse } from '../parser'
 import '../styles/global.css'
 
 export const revalidate = 600
-export default async function RootPage() {
-  const data = await fetchAndParse()
+
+export default function RootPage() {
+  const data = use(fetchAndParse())
   const now = new Date()
 
   return (
