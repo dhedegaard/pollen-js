@@ -2,12 +2,10 @@
 
 import styled from '@emotion/styled'
 import {
-  AppBar,
   Box,
   Container,
   Link,
   ThemeProvider,
-  Toolbar,
   Typography,
   colors,
 } from '@mui/material'
