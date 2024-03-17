@@ -23,7 +23,7 @@ export const CityElement = memo<Props>(function CityElement({ element }) {
       ))}
 
       {element.forecast.length > 0 && (
-        <div className="text-xs p-3 break-words">{element.forecast}</div>
+        <div className="text-xs p-3  break-normal">{element.forecast}</div>
       )}
     </div>
   )
