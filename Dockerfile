@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 LABEL maintainer="Dennis Hedegaard"
 
 WORKDIR /app
@@ -14,4 +14,4 @@ RUN npm run build
 
 # Run the app.
 ENV NODE_ENV=production
-CMD [ "node", "build/index.js" ]
+CMD [ "npm", "start" ]
