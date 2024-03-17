@@ -4,16 +4,8 @@ import styled from '@emotion/styled'
 import {
   AppBar,
   Box,
-  Card,
   Container,
-  Grid,
   Link,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -21,8 +13,8 @@ import {
 } from '@mui/material'
 import { createTheme } from '@mui/material/styles'
 import { CSSProperties, FC } from 'react'
+import { CityElement } from '../components/CityElement'
 import { Logo } from '../components/Logo'
-import { ValueItem } from '../components/ValueItem'
 import { ParsedXMLStructure } from '../parser'
 
 const SizedTypography = styled(Typography)<{
@@ -73,49 +65,12 @@ const ClientRootPage: FC<Props> = (props) => {
         </AppBar>
       </Box>
       <Container>
-        <Grid container spacing={3}>
-          {props.data?.map((elem) => (
-            <Grid item xs={6} key={elem.city}>
-              <Card>
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>
-                          <SizedTypography fontSize="1.2em">
-                            {elem.city}
-                          </SizedTypography>
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {Object.entries(elem.values).map(([pollenName, val]) => (
-                        <TableRow key={pollenName}>
-                          <TableCell>
-                            <div>
-                              <SizedTypography fontSize="0.9em">
-                                {pollenName}: <ValueItem value={val} />
-                              </SizedTypography>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                      {elem.forecast !== '' && (
-                        <TableRow>
-                          <TableCell>
-                            <SizedTypography fontSize="0.9em">
-                              {elem.forecast}
-                            </SizedTypography>
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Card>
-            </Grid>
+        <div className="grid grid-cols-2 gap-4 items-start">
+          {props.data?.map((element) => (
+            <CityElement element={element} key={element.city} />
           ))}
-        </Grid>
+        </div>
+
         <Box mt={2}>
           <SizedTypography fontSize="0.9em" paragraph align="right">
             {props.cacheTimestamp != null && (

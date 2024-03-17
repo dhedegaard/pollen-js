@@ -35,7 +35,7 @@ export default function RootLayout({ children }: Props) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon-256.png" />
       </head>
-      <body>{children}</body>
+      <body className="tracking-wide">{children}</body>
     </html>
   )
 }
