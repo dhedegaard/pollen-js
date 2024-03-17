@@ -52,18 +52,12 @@ const ClientRootPage: FC<Props> = (props) => {
         },
       })}
     >
-      <Box mb={2}>
-        <AppBar position="static" color="primary">
-          <Toolbar variant="dense">
-            <Container>
-              <h1 className="flex items-center text-xl gap-1 tracking-wide">
-                <Logo />
-                <span>Pollen</span>
-              </h1>
-            </Container>
-          </Toolbar>
-        </AppBar>
-      </Box>
+      <header className="bg-lime-500 py-3 flex items-center justify-center shadow mb-6 px-4">
+        <h1 className="max-w-6xl w-full flex-none flex items-center text-xl gap-1 tracking-wide">
+          <Logo />
+          <span>Pollen</span>
+        </h1>
+      </header>
       <Container>
         <div className="grid grid-cols-2 gap-4 items-start">
           {props.data?.map((element) => (
