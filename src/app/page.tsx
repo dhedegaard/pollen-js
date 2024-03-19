@@ -1,14 +1,14 @@
 import { use } from 'react'
-import { CityElement } from '../components/CityElement'
+import { getData } from '../actions/data-action'
 import { Logo } from '../components/Logo'
-import { fetchAndParse } from '../parser'
 import '../styles/global.css'
+import { CacheTimestamp } from './CacheTimestamp'
+import { CityElements } from './CityElements'
 
 export const revalidate = 600
 
 export default function RootPage() {
-  const data = use(fetchAndParse())
-  const now = new Date()
+  const data = use(getData())
 
   return (
     <>
@@ -18,16 +18,13 @@ export default function RootPage() {
           <span>Pollen</span>
         </h1>
       </header>
-      <div className="max-w-6xl px-4 mx-auto">
+      <main className="max-w-6xl px-4 mx-auto">
         <div className="grid grid-cols-2 gap-4 items-start">
-          {data.map((element) => (
-            <CityElement element={element} key={element.city} />
-          ))}
+          <CityElements initialData={data} />
         </div>
 
         <div className="my-2 text-right ml-auto text-sm">
-          Cache timestamp: <b>{now.toUTCString()}</b>
-          .
+          <CacheTimestamp initialData={data} />
           <br />
           Get the source on{' '}
           <a
@@ -39,7 +36,7 @@ export default function RootPage() {
             Github
           </a>
         </div>
-      </div>
+      </main>
     </>
   )
 }
