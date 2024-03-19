@@ -16,7 +16,7 @@ export function ValueItem({ value }: Props) {
       className={clsx(
         'font-bold',
         value < 21
-          ? 'text-green-600'
+          ? 'text-lime-700'
           : value < 51
           ? 'text-yellow-600'
           : 'text-red-600'
