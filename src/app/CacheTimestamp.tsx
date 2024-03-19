@@ -17,8 +17,8 @@ export const CacheTimestamp = memo(function CacheTimestamp({
     [data?.timestamp, initialData.timestamp]
   )
   return (
-    <>
-      Cache timestamp: <b>{timestamp}</b>.
-    </>
+    <div>
+      Cache timestamp: <span className="font-medium">{timestamp}</span>
+    </div>
   )
 })

@@ -8,7 +8,7 @@ interface Props {
 
 export const CityElement = memo<Props>(function CityElement({ element }) {
   return (
-    <div className="card rounded-lg border border-solid border-slate-100 shadow grid grid-cols-1 items-stretch text-base-content">
+    <section className="card rounded-lg border border-solid border-slate-100 shadow grid grid-cols-1 items-stretch text-base-content">
       <div className="text-base border-b p-3 border-solid border-slate-200">
         {element.city}
       </div>
@@ -25,6 +25,6 @@ export const CityElement = memo<Props>(function CityElement({ element }) {
       {element.forecast.length > 0 && (
         <div className="text-xs p-3  break-normal">{element.forecast}</div>
       )}
-    </div>
+    </section>
   )
 })

@@ -18,24 +18,25 @@ export default function RootPage() {
           <span>Pollen</span>
         </h1>
       </header>
-      <main className="max-w-6xl px-4 mx-auto">
-        <div className="grid grid-cols-2 gap-4 items-start">
+      <main className="max-w-6xl px-4 mx-auto ">
+        <div className="grid grid-cols-2 gap-4 items-start mb-4">
           <CityElements initialData={data} />
         </div>
 
-        <div className="my-2 text-right ml-auto text-sm">
+        <footer className="my-2 text-right ml-auto text-sm flex flex-col gap-0.5">
           <CacheTimestamp initialData={data} />
-          <br />
-          Get the source on{' '}
-          <a
-            href="https://github.com/dhedegaard/pollen-js"
-            className="link link-primary"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Github
-          </a>
-        </div>
+          <div>
+            Get the source on{' '}
+            <a
+              href="https://github.com/dhedegaard/pollen-js"
+              className="link link-primary"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Github
+            </a>
+          </div>
+        </footer>
       </main>
     </>
   )
