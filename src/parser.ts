@@ -45,7 +45,6 @@ type ApiResponse = z.infer<typeof ApiResponse>
 const fetchData = async (): Promise<ApiResponse> => {
   return await fetch(APIURL, {
     cache: 'no-cache',
-    next: { revalidate: 0 },
   })
     .then((resp) => {
       if (!resp.ok) {
