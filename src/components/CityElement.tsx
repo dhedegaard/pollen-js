@@ -1,6 +1,6 @@
 import { memo } from 'react'
+import { ParsedXMLStructure } from '../clients/dmi-client'
 import { ValueItem } from '../components/ValueItem'
-import { ParsedXMLStructure } from '../parser'
 
 interface Props {
   element: ParsedXMLStructure

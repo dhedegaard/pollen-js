@@ -1,6 +1,6 @@
 'use server'
 
-import { ParsedXMLStructure, fetchAndParse } from '../parser'
+import { ParsedXMLStructure, createDmiClient } from '../clients/dmi-client'
 
 export interface DataActionResult {
   cities: readonly ParsedXMLStructure[]
@@ -8,7 +8,8 @@ export interface DataActionResult {
 }
 export async function getData(): Promise<DataActionResult> {
   try {
-    const cities = await fetchAndParse()
+    const dmiClient = createDmiClient()
+    const cities = await dmiClient.fetchAndParse()
     const result: DataActionResult = {
       cities,
       timestamp: new Date().toISOString(),
