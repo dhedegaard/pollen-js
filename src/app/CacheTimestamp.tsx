@@ -16,9 +16,9 @@ export const CacheTimestamp = memo(function CacheTimestamp({
   const timestamp = useMemo(
     () =>
       new Date(data?.updateTime ?? initialData.updateTime).toLocaleString(
-        'en-GB'
+        'en-GB',
       ),
-    [data?.updateTime, initialData.updateTime]
+    [data?.updateTime, initialData.updateTime],
   )
   return (
     <div>
@@ -26,7 +26,7 @@ export const CacheTimestamp = memo(function CacheTimestamp({
       <span
         className={clsx(
           'font-medium',
-          isLoading && 'skeleton rounded bg-slate-100 text-transparent ml-auto'
+          isLoading && 'skeleton ml-auto rounded bg-slate-100 text-transparent',
         )}
       >
         {timestamp}

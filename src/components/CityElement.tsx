@@ -8,15 +8,15 @@ interface Props {
 
 export const CityElement = memo<Props>(function CityElement({ element }) {
   return (
-    <section className="card rounded-lg border border-solid border-slate-100 shadow grid grid-cols-1 items-stretch text-base-content">
-      <div className="text-base border-b p-3 border-solid border-slate-200">
+    <section className="card grid grid-cols-1 items-stretch rounded-lg border border-solid border-slate-100 text-base-content shadow">
+      <div className="border-b border-solid border-slate-200 p-3 text-base">
         {element.city}
       </div>
 
       {element.levels.map((level) => (
         <div
           key={level.label}
-          className="text-sm border-b p-3 border-solid border-slate-200"
+          className="border-b border-solid border-slate-200 p-3 text-sm"
         >
           {level.label}:{' '}
           <ValueItem value={level.level} severity={level.severity} />

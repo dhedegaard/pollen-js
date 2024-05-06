@@ -100,12 +100,12 @@ const innerDataSchema = z
               value.level == null
                 ? 'none'
                 : value.level > mediumLevel
-                ? 'high'
-                : value.level > lowLevel
-                ? 'medium'
-                : value.level > noneLevel
-                ? 'low'
-                : 'none'
+                  ? 'high'
+                  : value.level > lowLevel
+                    ? 'medium'
+                    : value.level > noneLevel
+                      ? 'low'
+                      : 'none'
 
             acc.push({
               label: label,
@@ -114,7 +114,7 @@ const innerDataSchema = z
               inSeason: value.inSeason,
             })
             return acc
-          }, [])
+          }, []),
         ),
     }),
   })
@@ -163,11 +163,11 @@ export const createAstmaAllergiClient = () => ({
     .args()
     .implement(async function getPollenFeed(): Promise<AstmaAllergiFeedData> {
       const response = await fetch(
-        'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed'
+        'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed',
       ).then(async (response) => {
         if (!response.ok) {
           throw new Error(
-            `Unclean RC: ${response.status} ${response.statusText}`
+            `Unclean RC: ${response.status} ${response.statusText}`,
           )
         }
         return response

@@ -12,7 +12,7 @@ export const GET = async () => {
       process.env.NODE_ENV === 'development'
         ? String(error)
         : 'Internal Server Error',
-      { status: 500 }
+      { status: 500 },
     )
   }
 }

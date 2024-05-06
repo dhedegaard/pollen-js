@@ -10,7 +10,7 @@ const apiResponseSchema = z
       products: z.object({
         text: z.string().min(1),
       }),
-    })
+    }),
   )
   .min(1)
 const xmlSchema = z.object({
@@ -30,11 +30,11 @@ const xmlSchema = z.object({
                     z.string().regex(/^\d+(?:\s\D+)?$/),
                   ]),
                 ]),
-              })
+              }),
             ),
           }),
         ]),
-      })
+      }),
     ),
     info: z.tuple([z.string()]),
   }),
@@ -83,7 +83,7 @@ export const createDmiClient = () => {
     forecast.replace(/&?gt;/g, '>').replace(/&?lt;/g, '<')
 
   const parseXMLStructure = function* (
-    xml: z.TypeOf<typeof xmlSchema>
+    xml: z.TypeOf<typeof xmlSchema>,
   ): IterableIterator<ParsedXMLStructure> {
     for (const region of xml.pollen_info.region) {
       yield {
@@ -97,8 +97,8 @@ export const createDmiClient = () => {
             value === '-'
               ? null
               : !/^\d+/.test(value)
-              ? value
-              : parseInt(value, 10)
+                ? value
+                : parseInt(value, 10)
           return obj
         }, {}),
         forecast: preprocessForecase(region.forecast[0]),

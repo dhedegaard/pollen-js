@@ -12,7 +12,7 @@ export const CityElements = memo(function CityElements({ initialData }: Props) {
   const { data } = useData()
   const cities = useMemo(
     () => data?.cities ?? initialData.cities,
-    [data?.cities, initialData.cities]
+    [data?.cities, initialData.cities],
   )
 
   return cities.map((element) => (
