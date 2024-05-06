@@ -5,7 +5,6 @@ import '../styles/global.css'
 export const metadata: Metadata = {
   title: 'Pollen',
   description: 'Pollen',
-  manifest: '/manifest.json',
   robots: { index: true, follow: true },
   openGraph: {
     siteName: 'Pollen',
