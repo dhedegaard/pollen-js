@@ -1,10 +1,13 @@
 import clsx from 'clsx'
+import { memo } from 'react'
+import { PollenSeverity } from '../clients/astma-allergi-client'
 
 type Props = {
-  value: string | number | null
+  value: number | null
+  severity: PollenSeverity
 }
-export function ValueItem({ value }: Props) {
-  if (value == null || (typeof value === 'number' && value < 1)) {
+export const ValueItem = memo<Props>(function ValueItem({ value, severity }) {
+  if (value == null || value < 1) {
     return <span className="text-slate-600">-</span>
   }
   if (typeof value === 'string') {
@@ -15,14 +18,16 @@ export function ValueItem({ value }: Props) {
     <span
       className={clsx(
         'font-bold',
-        value < 21
-          ? 'text-lime-700'
-          : value < 51
-          ? 'text-yellow-600'
-          : 'text-red-600'
+        severity === 'none'
+          ? 'text-slate-600'
+          : severity === 'low'
+            ? 'text-lime-700'
+            : severity === 'medium'
+              ? 'text-yellow-600'
+              : 'text-red-600',
       )}
     >
       {value.toString()}
     </span>
   )
-}
+})

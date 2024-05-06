@@ -2,11 +2,11 @@
 
 import clsx from 'clsx'
 import { memo, useMemo } from 'react'
-import { DataActionResult } from '../actions/data-action'
 import { useData } from '../actions/data-fetcher'
+import { AstmaAllergiFeedData } from '../clients/astma-allergi-client'
 
 interface Props {
-  initialData: DataActionResult
+  initialData: AstmaAllergiFeedData
 }
 
 export const CacheTimestamp = memo(function CacheTimestamp({
@@ -15,10 +15,10 @@ export const CacheTimestamp = memo(function CacheTimestamp({
   const { data, isLoading } = useData()
   const timestamp = useMemo(
     () =>
-      new Date(data?.timestamp ?? initialData.timestamp).toLocaleString(
-        'en-GB'
+      new Date(data?.updateTime ?? initialData.updateTime).toLocaleString(
+        'en-GB',
       ),
-    [data?.timestamp, initialData.timestamp]
+    [data?.updateTime, initialData.updateTime],
   )
   return (
     <div>
@@ -26,7 +26,7 @@ export const CacheTimestamp = memo(function CacheTimestamp({
       <span
         className={clsx(
           'font-medium',
-          isLoading && 'skeleton rounded bg-slate-100 text-transparent ml-auto'
+          isLoading && 'skeleton ml-auto rounded bg-slate-100 text-transparent',
         )}
       >
         {timestamp}
