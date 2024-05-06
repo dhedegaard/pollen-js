@@ -1,12 +1,12 @@
+import Link from 'next/link'
 import { use } from 'react'
 import { getData } from '../actions/data-action'
 import { Logo } from '../components/Logo'
 import '../styles/global.css'
 import { CacheTimestamp } from './CacheTimestamp'
 import { CityElements } from './CityElements'
-import Link from 'next/link'
 
-export const revalidate = 600
+export const revalidate = 3600
 
 export default function RootPage() {
   const data = use(getData())
