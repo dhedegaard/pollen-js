@@ -164,10 +164,10 @@ export const createAstmaAllergiClient = () => ({
     .implement(async function getPollenFeed(): Promise<AstmaAllergiFeedData> {
       const response = await fetch(
         'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed',
-      ).then(async (response) => {
+      ).then((response) => {
         if (!response.ok) {
           throw new Error(
-            `Unclean RC: ${response.status} ${response.statusText}`,
+            `Unclean RC: ${response.status.toString()} ${response.statusText}`,
           )
         }
         return response
@@ -176,7 +176,7 @@ export const createAstmaAllergiClient = () => ({
       const result = await response
         .json()
         .then((json: unknown) => nonEmptyStringSchema.parseAsync(json))
-        .then((jsonString) => JSON.parse(jsonString))
+        .then((jsonString): unknown => JSON.parse(jsonString))
       return responseJsonSchema.parseAsync(result)
     }),
 })
