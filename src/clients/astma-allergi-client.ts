@@ -1,15 +1,27 @@
+/**
+ * The datasource here is just downright terrible. The issues are:
+ *
+ * - The backend emits "json" as string, which means we double parse it.
+ * - The datastructure is a mess, with a lot of nesting and unnecessary fields, terrible for maintainability.
+ * - Mapping of the real data (names and such) happen in the client, wtf.
+ *
+ * This will probably break in the future, as the data is not stable.
+ *
+ * We cleanup the datastrure with transforms after validating the structure as needed, this means that future breakable
+ * should be fairly trivial to fix.
+ */
 import { z } from 'zod'
 
 // See: <https://www.astma-allergi.dk/scripts/pollen.js>
 const POLLEN_NAMES = {
-  44: 'alternaria',
-  7: 'birk',
-  31: 'bynke',
-  45: 'cladosporium',
-  1: 'el',
-  4: 'elm',
-  28: 'græs',
-  2: 'hassel',
+  7: 'Birk',
+  28: 'Græs',
+  1: 'El',
+  2: 'Hassel',
+  4: 'Elm',
+  31: 'Bynke',
+  44: 'Alternaria',
+  45: 'Cladosporium',
 } as const
 const POLLEN_LEVEL_INTERVALS = {
   44: [0, 20, 100, 500],
