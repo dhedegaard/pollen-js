@@ -4,6 +4,7 @@ import { Logo } from '../components/Logo'
 import '../styles/global.css'
 import { CacheTimestamp } from './CacheTimestamp'
 import { CityElements } from './CityElements'
+import Link from 'next/link'
 
 export const revalidate = 600
 
@@ -26,6 +27,13 @@ export default function RootPage() {
         <footer className="my-2 text-right ml-auto text-sm flex flex-col gap-0.5">
           <CacheTimestamp initialData={data} />
           <div>
+            Get the data{' '}
+            <Link className="link link-primary" href="/api/data">
+              here
+            </Link>
+            .
+          </div>
+          <div>
             Get the source on{' '}
             <a
               href="https://github.com/dhedegaard/pollen-js"
@@ -35,6 +43,7 @@ export default function RootPage() {
             >
               Github
             </a>
+            .
           </div>
         </footer>
       </main>
