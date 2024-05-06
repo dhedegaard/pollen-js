@@ -1,11 +1,12 @@
 import clsx from 'clsx'
+import { memo } from 'react'
 import { PollenSeverity } from '../clients/astma-allergi-client'
 
 type Props = {
   value: number | null
   severity: PollenSeverity
 }
-export function ValueItem({ value, severity }: Props) {
+export const ValueItem = memo<Props>(function ValueItem({ value, severity }) {
   if (value == null || value < 1) {
     return <span className="text-slate-600">-</span>
   }
@@ -29,4 +30,4 @@ export function ValueItem({ value, severity }: Props) {
       {value.toString()}
     </span>
   )
-}
+})
