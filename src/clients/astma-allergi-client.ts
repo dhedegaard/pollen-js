@@ -154,13 +154,14 @@ const responseJsonSchema = z
     updateTime: value.updateTime,
     cities: value.fields,
   }))
-interface ResponseJson extends z.infer<typeof responseJsonSchema> {}
+export interface AstmaAllergiFeedData
+  extends z.infer<typeof responseJsonSchema> {}
 
 export const createAstmaAllergiClient = () => ({
   getPollenFeed: z
     .function()
     .args()
-    .implement(async function getPollenFeed(): Promise<ResponseJson> {
+    .implement(async function getPollenFeed(): Promise<AstmaAllergiFeedData> {
       const response = await fetch(
         'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed'
       ).then(async (response) => {
@@ -170,11 +171,12 @@ export const createAstmaAllergiClient = () => ({
           )
         }
         return response
-          .json()
-          .then<ResponseJson>((json) =>
-            responseJsonSchema.parseAsync(JSON.parse(json))
-          )
       })
-      return response
+      // NOTE: The backend emits "json" as string, which means we double parse it. The worst API in history.
+      const result = await response
+        .json()
+        .then((json: unknown) => nonEmptyStringSchema.parseAsync(json))
+        .then((jsonString) => JSON.parse(jsonString))
+      return responseJsonSchema.parseAsync(result)
     }),
 })
