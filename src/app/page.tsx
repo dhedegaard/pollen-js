@@ -3,7 +3,7 @@ import { use } from 'react'
 import { getData } from '../actions/data-action'
 import { Logo } from '../components/Logo'
 import '../styles/global.css'
-import { CacheTimestamp } from './CacheTimestamp'
+import { LastUpdateTimestamp } from './LastUpdateTimestamp'
 import { CityElements } from './CityElements'
 
 export const revalidate = 3600
@@ -25,7 +25,7 @@ export default function RootPage() {
         </div>
 
         <footer className="my-2 ml-auto flex flex-col gap-0.5 text-right text-sm">
-          <CacheTimestamp initialData={data} />
+          <LastUpdateTimestamp initialData={data} />
           <div>
             Get the data{' '}
             <Link className="link link-primary" href="/api/data">

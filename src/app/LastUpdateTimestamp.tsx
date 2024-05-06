@@ -9,11 +9,11 @@ interface Props {
   initialData: AstmaAllergiFeedData
 }
 
-export const CacheTimestamp = memo(function CacheTimestamp({
+export const LastUpdateTimestamp = memo(function LastUpdateTimestamp({
   initialData,
 }: Props) {
   const { data, isLoading } = useData()
-  const timestamp = useMemo(
+  const updateTime = useMemo(
     () =>
       new Date(data?.updateTime ?? initialData.updateTime).toLocaleString(
         'en-GB',
@@ -22,14 +22,14 @@ export const CacheTimestamp = memo(function CacheTimestamp({
   )
   return (
     <div>
-      Cache timestamp:{' '}
+      Last data timestamp:{' '}
       <span
         className={clsx(
           'font-medium',
           isLoading && 'skeleton ml-auto rounded bg-slate-100 text-transparent',
         )}
       >
-        {timestamp}
+        {updateTime}
       </span>
     </div>
   )
