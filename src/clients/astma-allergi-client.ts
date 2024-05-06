@@ -140,15 +140,20 @@ const outerFieldsSchema = z
     49: mapValueFieldsSchema,
   })
   .strict()
-  .transform((value) => ({
-    Aarhus: value[49],
-    Copenhagen: value[48],
-  }))
+  .transform((value) => [
+    { city: 'Aarhus', levels: value[49] },
+    { city: 'Copenhagen', levels: value[48] },
+  ])
 
-const responseJsonSchema = z.object({
-  updateTime: z.string().datetime({ offset: true }),
-  fields: outerFieldsSchema,
-})
+const responseJsonSchema = z
+  .object({
+    updateTime: z.string().datetime({ offset: true }),
+    fields: outerFieldsSchema,
+  })
+  .transform((value) => ({
+    updateTime: value.updateTime,
+    cities: value.fields,
+  }))
 interface ResponseJson extends z.infer<typeof responseJsonSchema> {}
 
 export const createAstmaAllergiClient = () => ({
