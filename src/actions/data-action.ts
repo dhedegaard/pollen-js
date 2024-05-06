@@ -1,20 +1,14 @@
 'use server'
 
-import { ParsedXMLStructure, createDmiClient } from '../clients/dmi-client'
+import {
+  AstmaAllergiFeedData,
+  createAstmaAllergiClient,
+} from '../clients/astma-allergi-client'
 
-export interface DataActionResult {
-  cities: readonly ParsedXMLStructure[]
-  timestamp: string
-}
-export async function getData(): Promise<DataActionResult> {
+export async function getData(): Promise<AstmaAllergiFeedData> {
   try {
-    const dmiClient = createDmiClient()
-    const cities = await dmiClient.fetchAndParse()
-    const result: DataActionResult = {
-      cities,
-      timestamp: new Date().toISOString(),
-    }
-    return result
+    const astmaAllergiClient = createAstmaAllergiClient()
+    return await astmaAllergiClient.getPollenFeed()
   } catch (error: unknown) {
     console.error(error)
     throw error

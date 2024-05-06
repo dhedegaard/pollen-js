@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 import useSWR, { SWRResponse } from 'swr'
-import { DataActionResult, getData } from './data-action'
+import { AstmaAllergiFeedData } from '../clients/astma-allergi-client'
+import { getData } from './data-action'
 
-export const useData = (): SWRResponse<DataActionResult, unknown> => {
-  const response = useSWR<DataActionResult, unknown>('data', getData)
+export const useData = (): SWRResponse<AstmaAllergiFeedData, unknown> => {
+  const response = useSWR<AstmaAllergiFeedData, unknown>('data', getData)
 
   useEffect(() => {
     if (response.error != null) {

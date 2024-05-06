@@ -1,10 +1,12 @@
 import clsx from 'clsx'
+import { PollenSeverity } from '../clients/astma-allergi-client'
 
 type Props = {
-  value: string | number | null
+  value: number | null
+  severity: PollenSeverity
 }
-export function ValueItem({ value }: Props) {
-  if (value == null || (typeof value === 'number' && value < 1)) {
+export function ValueItem({ value, severity }: Props) {
+  if (value == null || value < 1) {
     return <span className="text-slate-600">-</span>
   }
   if (typeof value === 'string') {
@@ -15,9 +17,11 @@ export function ValueItem({ value }: Props) {
     <span
       className={clsx(
         'font-bold',
-        value < 21
+        severity === 'none'
+          ? 'text-slate-600'
+          : severity === 'low'
           ? 'text-lime-700'
-          : value < 51
+          : severity === 'medium'
           ? 'text-yellow-600'
           : 'text-red-600'
       )}

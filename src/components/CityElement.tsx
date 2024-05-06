@@ -1,9 +1,9 @@
 import { memo } from 'react'
-import { ParsedXMLStructure } from '../clients/dmi-client'
+import { AstmaAllergiFeedData } from '../clients/astma-allergi-client'
 import { ValueItem } from '../components/ValueItem'
 
 interface Props {
-  element: ParsedXMLStructure
+  element: AstmaAllergiFeedData['cities'][number]
 }
 
 export const CityElement = memo<Props>(function CityElement({ element }) {
@@ -13,18 +13,15 @@ export const CityElement = memo<Props>(function CityElement({ element }) {
         {element.city}
       </div>
 
-      {Object.entries(element.values).map(([pollenName, val]) => (
+      {element.levels.map((level) => (
         <div
-          key={pollenName}
+          key={level.label}
           className="text-sm border-b p-3 border-solid border-slate-200"
         >
-          {pollenName}: <ValueItem value={val} />
+          {level.label}:{' '}
+          <ValueItem value={level.level} severity={level.severity} />
         </div>
       ))}
-
-      {element.forecast.length > 0 && (
-        <div className="text-xs p-3  break-normal">{element.forecast}</div>
-      )}
     </section>
   )
 })
