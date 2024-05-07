@@ -164,6 +164,7 @@ export const createAstmaAllergiClient = () => ({
     .implement(async function getPollenFeed(): Promise<AstmaAllergiFeedData> {
       const response = await fetch(
         'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed',
+        { cache: 'no-cache', next: { revalidate: 0 } },
       ).then((response) => {
         if (!response.ok) {
           throw new Error(
