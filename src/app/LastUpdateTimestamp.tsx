@@ -25,7 +25,7 @@ export const LastUpdateTimestamp = memo(function LastUpdateTimestamp({
       Last data timestamp:{' '}
       <span
         className={clsx(
-          'font-medium',
+          'font-semibold',
           isLoading && 'skeleton ml-auto rounded bg-slate-100 text-transparent',
         )}
       >
