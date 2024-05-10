@@ -14,9 +14,9 @@ export default function RootPage() {
 
   return (
     <>
-      <header className="mb-8 bg-lime-500 px-4 py-3 shadow">
+      <header className="mb-4 bg-lime-500 py-3 shadow">
         <div className="mx-auto flex max-w-6xl items-center justify-center px-4">
-          <h1 className="flex flex-auto items-center gap-1 px-4 text-xl tracking-wide">
+          <h1 className="flex flex-auto items-center gap-1 text-xl tracking-wide">
             <Logo />
             <span>Pollen</span>
           </h1>
@@ -24,12 +24,12 @@ export default function RootPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4">
-        <div className="mb-4 grid grid-cols-2 items-start gap-4">
+      <main className="mx-auto max-w-6xl">
+        <div className="mb-4 grid grid-cols-2 items-start gap-4 px-4">
           <CityElements initialData={data} />
         </div>
 
-        <footer className="my-2 ml-auto flex flex-col gap-1 text-right text-sm">
+        <footer className="my-2 ml-auto flex flex-col gap-1 px-4 text-right text-sm">
           <LastUpdateTimestamp initialData={data} />
           <div>
             Get the data{' '}
