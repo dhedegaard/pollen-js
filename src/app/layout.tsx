@@ -33,6 +33,12 @@ export default function RootLayout({ children }: Props) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon-256.png" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Pollen RSS feed"
+          href="/feed"
+        />
       </head>
       <body className="tracking-wide">{children}</body>
     </html>
