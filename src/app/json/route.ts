@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createAstmaAllergiClient } from '../../../clients/astma-allergi-client'
+import { createAstmaAllergiClient } from '../../clients/astma-allergi-client'
 
 export const GET = async () => {
   try {

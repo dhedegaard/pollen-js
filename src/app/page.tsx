@@ -32,9 +32,13 @@ export default function RootPage() {
         <footer className="my-2 ml-auto flex flex-col gap-1 px-4 text-right text-sm">
           <LastUpdateTimestamp initialData={data} />
           <div>
-            Get the data{' '}
-            <Link className="link link-primary" href="/api/data">
-              here
+            Get the data:{' '}
+            <Link className="link link-primary" href="/json">
+              JSON
+            </Link>{' '}
+            -{' '}
+            <Link className="link link-primary" href="/feed">
+              RSS
             </Link>
             .
           </div>
