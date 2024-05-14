@@ -37,7 +37,7 @@ export default function RootPage() {
               JSON
             </Link>{' '}
             -{' '}
-            <Link className="link link-primary" href="/feed">
+            <Link className="link link-primary" href="/rss">
               RSS
             </Link>
             .
