@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "GPL-3.0-or-later",
   "private": false,
+  "type": "module",
   "engines": {
     "node": ">=22",
     "npm": ">=9"
