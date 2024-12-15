@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { use } from 'react'
 import { getData } from '../actions/data-action'
 import '../styles/global.css'
@@ -20,13 +19,13 @@ export default function RootPage() {
         <LastUpdateTimestamp data={data} />
         <div>
           Get the data:{' '}
-          <Link className="link link-primary" href="/json">
+          <a className="link link-primary" href="/json">
             JSON
-          </Link>{' '}
+          </a>{' '}
           -{' '}
-          <Link className="link link-primary" href="/rss">
+          <a className="link link-primary" href="/rss">
             RSS
-          </Link>
+          </a>
           .
         </div>
         <div>
