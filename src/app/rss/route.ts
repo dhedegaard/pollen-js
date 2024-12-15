@@ -1,5 +1,4 @@
 import { NextRequest } from 'next/server'
-import { create } from 'xmlbuilder2'
 import { getData } from '../../actions/data-action'
 
 export const GET = async (request: NextRequest) => {
@@ -20,6 +19,7 @@ export const GET = async (request: NextRequest) => {
   const atomLink = new URL(baseURL)
   atomLink.pathname = request.nextUrl.pathname
 
+  const { create } = await import('xmlbuilder2')
   const xml = create({
     rss: {
       '@xmlns:atom': 'http://www.w3.org/2005/Atom',
