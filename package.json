@@ -4,7 +4,7 @@
   "license": "GPL-3.0-or-later",
   "private": false,
   "engines": {
-    "node": ">=20",
+    "node": ">=22",
     "npm": ">=9"
   },
   "scripts": {
@@ -14,31 +14,31 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.3",
+    "@heroicons/react": "^2.2.0",
     "clsx": "^2.1.1",
-    "daisyui": "^4.11.1",
-    "next": "^14.2.3",
+    "daisyui": "^4.12.22",
+    "next": "^14.2.20",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "swr": "^2.2.5",
-    "typescript": "^5.4.5",
+    "typescript": "^5.7.2",
     "xmlbuilder2": "^3.1.1",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@tsconfig/next": "^2.0.3",
     "@tsconfig/strictest": "^2.0.5",
-    "@types/node": "^20.12.9",
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.19",
-    "eslint": "8.57.0",
-    "eslint-config-next": "14.2.3",
-    "eslint-plugin-tailwindcss": "^3.15.1",
-    "postcss": "^8.4.38",
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14",
-    "tailwindcss": "^3.4.3",
-    "typescript-eslint": "^7.8.0"
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.16",
+    "@types/react-dom": "^18.3.5",
+    "autoprefixer": "^10.4.20",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.20",
+    "eslint-plugin-tailwindcss": "^3.17.5",
+    "postcss": "^8.4.49",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss": "^3.4.16",
+    "typescript-eslint": "^7.18.0"
   }
 }

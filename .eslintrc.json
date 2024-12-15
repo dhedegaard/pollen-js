@@ -1,7 +1,12 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:tailwindcss/recommended", "plugin:@typescript-eslint/strict-type-checked"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/strict-type-checked"
+  ],
   "rules": {
-    "no-console": ["error", { "allow": ["warn", "error"] }]
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "@typescript-eslint/no-empty-object-type": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
