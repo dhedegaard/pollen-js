@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
+import { Logo } from '../components/Logo'
 import '../styles/global.css'
 
 export const metadata: Metadata = {
@@ -40,7 +41,18 @@ export default function RootLayout({ children }: Props) {
           href="/feed"
         />
       </head>
-      <body className="tracking-wide">{children}</body>
+      <body className="tracking-wide">
+        <header className="mb-4 bg-lime-500 py-3 shadow">
+          <div className="mx-auto flex max-w-6xl items-center justify-center px-4">
+            <h1 className="flex flex-auto items-center gap-1 text-xl tracking-wide">
+              <Logo />
+              <span>Pollen</span>
+            </h1>
+          </div>
+        </header>
+
+        <main className="mx-auto max-w-6xl">{children}</main>
+      </body>
     </html>
   )
 }
