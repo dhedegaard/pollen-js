@@ -1,7 +1,8 @@
+import '../styles/global.css'
+
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
 import { Logo } from '../components/Logo'
-import '../styles/global.css'
 
 export const metadata: Metadata = {
   title: 'Pollen',
