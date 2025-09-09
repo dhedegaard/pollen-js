@@ -13,7 +13,7 @@
  * @see <https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed>
  * @see <https://www.astma-allergi.dk/scripts/pollen.js>
  */
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 // See: <https://www.astma-allergi.dk/scripts/pollen.js>
 const POLLEN_NAMES = {
@@ -57,7 +57,7 @@ const fieldValueSchema = z
             integerValue: z
               .string()
               .regex(/-?\d+$/)
-              .transform((value) => parseInt(value)),
+              .transform((value) => parseInt(value, 10)),
           })
           .transform((value) => value.integerValue)
           .transform((value) => (value === -1 ? null : value))
@@ -89,7 +89,10 @@ const innerDataSchema = z
             })[]
           >((acc, [key, value]) => {
             // Determine the real pollen name.
-            const intKey = parseInt(key) as unknown as keyof typeof POLLEN_NAMES
+            const intKey = parseInt(
+              key,
+              10,
+            ) as unknown as keyof typeof POLLEN_NAMES
             const label = nonEmptyStringSchema.parse(POLLEN_NAMES[intKey])
 
             // Determine the severity based on the type of pollen.
@@ -123,11 +126,7 @@ const innerDataSchema = z
 const mapValueFieldsSchema = z
   .object({
     mapValue: z
-      .object({
-        fields: z.object({
-          data: innerDataSchema,
-        }),
-      })
+      .object({ fields: z.object({ data: innerDataSchema }) })
       .transform((value) => value.fields),
   })
   .transform((value) => value.mapValue.data)
@@ -147,7 +146,7 @@ const outerFieldsSchema = z
 
 const responseJsonSchema = z
   .object({
-    updateTime: z.string().datetime({ offset: true }),
+    updateTime: z.iso.datetime({ offset: true }),
     fields: outerFieldsSchema,
   })
   .transform((value) => ({
@@ -158,25 +157,22 @@ export interface AstmaAllergiFeedData
   extends z.infer<typeof responseJsonSchema> {}
 
 export const createAstmaAllergiClient = () => ({
-  getPollenFeed: z
-    .function()
-    .args()
-    .implement(async function getPollenFeed(): Promise<AstmaAllergiFeedData> {
-      const response = await fetch(
-        'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed',
-      ).then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `Unclean RC: ${response.status.toString()} ${response.statusText}`,
-          )
-        }
-        return response
-      })
-      // NOTE: The backend emits "json" as string, which means we double parse it. The worst API in history.
-      const result = await response
-        .json()
-        .then((json: unknown) => nonEmptyStringSchema.parseAsync(json))
-        .then((jsonString): unknown => JSON.parse(jsonString))
-      return responseJsonSchema.parseAsync(result)
-    }),
+  getPollenFeed: async function getPollenFeed(): Promise<AstmaAllergiFeedData> {
+    const response = await fetch(
+      'https://www.astma-allergi.dk/umbraco/Api/PollenApi/GetPollenFeed',
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `Unclean RC: ${response.status.toString()} ${response.statusText}`,
+        )
+      }
+      return response
+    })
+    // NOTE: The backend emits "json" as string, which means we double parse it. The worst API in history.
+    const result = await response
+      .json()
+      .then((json: unknown) => nonEmptyStringSchema.parseAsync(json))
+      .then((jsonString): unknown => JSON.parse(jsonString))
+    return responseJsonSchema.parseAsync(result)
+  },
 })
