@@ -18,7 +18,7 @@
     "@heroicons/react": "^2.2.0",
     "clsx": "^2.1.1",
     "daisyui": "^4.12.22",
-    "next": "15.5.2",
+    "next": "15.5.7",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "typescript": "^5.9.2",
