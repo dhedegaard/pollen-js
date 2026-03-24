@@ -8,11 +8,6 @@ export const GET = async () => {
     return NextResponse.json(data)
   } catch (error: unknown) {
     console.error(error)
-    return new Response(
-      process.env.NODE_ENV === 'development'
-        ? String(error)
-        : 'Internal Server Error',
-      { status: 500 },
-    )
+    return new Response('Internal Server Error', { status: 500 })
   }
 }
