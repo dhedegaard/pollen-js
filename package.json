@@ -17,28 +17,28 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "clsx": "^2.1.1",
-    "daisyui": "^4.12.22",
+    "daisyui": "^4.12.24",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "typescript": "^5.9.2",
-    "xmlbuilder2": "^4.0.0",
-    "zod": "^4.1.5"
+    "typescript": "^6.0.3",
+    "xmlbuilder2": "^4.0.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@tsconfig/next": "^2.0.3",
-    "@tsconfig/strictest": "^2.0.5",
-    "@types/node": "^22.10.2",
+    "@tsconfig/next": "^2.0.6",
+    "@tsconfig/strictest": "^2.0.8",
+    "@types/node": "^22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "autoprefixer": "^10.4.21",
-    "eslint": "9.35.0",
+    "autoprefixer": "^10.5.0",
+    "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
-    "postcss": "^8.5.6",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
-    "tailwindcss": "^3.4.16",
-    "typescript-eslint": "^8.43.0"
+    "postcss": "^8.5.14",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "tailwindcss": "^3.4.19",
+    "typescript-eslint": "^8.59.3"
   },
   "overrides": {
     "@types/react": "19.2.14",
