@@ -64,7 +64,6 @@ function parseCity(response: OpenMeteoResponse, cityName: string) {
         severity: severity(todayPeak, thresholds),
         tomorrowLevel: tomorrowPeak,
         tomorrowSeverity: severity(tomorrowPeak, thresholds),
-        inSeason: (todayPeak != null && todayPeak > 0) || (tomorrowPeak != null && tomorrowPeak > 0),
       }
     }),
   }
@@ -98,7 +97,6 @@ export interface PollenFeedData {
       severity: PollenSeverity
       tomorrowLevel: number | null
       tomorrowSeverity: PollenSeverity
-      inSeason: boolean
     }>
   }>
 }
