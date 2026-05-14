@@ -1,17 +1,24 @@
-FROM node:lts-alpine
-LABEL maintainer="Dennis Hedegaard"
-
+FROM node:24-alpine AS deps
 WORKDIR /app
-EXPOSE 3000
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
-# Install dependencies.
+FROM node:24-alpine AS builder
+WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
-
-# Build the app.
-COPY . ./
+COPY . .
 RUN npm run build
 
-# Run the app.
+FROM node:24-alpine AS runner
+LABEL maintainer="Dennis Hedegaard"
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+WORKDIR /app
 ENV NODE_ENV=production
-CMD [ "npm", "start" ]
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --chown=nextjs:nodejs package.json ./
+USER nextjs
+EXPOSE 3000
+CMD ["npm", "start"]
