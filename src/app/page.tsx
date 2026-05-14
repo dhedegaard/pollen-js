@@ -2,8 +2,6 @@ import { getData } from '../actions/data-action'
 import { CityElements } from './CityElements'
 import { LastUpdateTimestamp } from './LastUpdateTimestamp'
 
-export const revalidate = 3600
-
 export default async function RootPage() {
   const data = await getData()
 
