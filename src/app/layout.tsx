@@ -4,15 +4,19 @@ import { Metadata } from 'next'
 import { ReactNode } from 'react'
 import { Logo } from '../components/Logo'
 
+const title = 'Pollen'
+const description = 'Daily pollen levels for Denmark.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://pollen.dhedegaard.dk'),
-  title: 'Pollen',
-  description: 'Pollen',
+  title,
+  description,
   robots: { index: true, follow: true },
   openGraph: {
-    siteName: 'Pollen',
+    siteName: title,
     url: 'https://pollen.dhedegaard.dk/',
-    title: 'Pollen',
+    title,
+    description,
     type: 'website',
     images: [{ url: '/favicon-256.png' }],
   },
