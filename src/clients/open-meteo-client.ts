@@ -3,10 +3,10 @@ import { z } from 'zod/v4'
 export type PollenSeverity = 'none' | 'low' | 'medium' | 'high'
 
 const POLLEN_TYPES = [
-  { key: 'birch_pollen', label: 'Birk', thresholds: [0, 30, 100, 550] },
-  { key: 'grass_pollen', label: 'Græs', thresholds: [0, 10, 50, 150] },
-  { key: 'alder_pollen', label: 'El', thresholds: [0, 10, 50, 200] },
-  { key: 'mugwort_pollen', label: 'Bynke', thresholds: [0, 10, 50, 60] },
+  { key: 'birch_pollen', label: 'Birk', thresholds: [0, 30, 100] },
+  { key: 'grass_pollen', label: 'Græs', thresholds: [0, 10, 50] },
+  { key: 'alder_pollen', label: 'El', thresholds: [0, 10, 50] },
+  { key: 'mugwort_pollen', label: 'Bynke', thresholds: [0, 10, 50] },
 ] as const
 
 const CITIES = [
@@ -31,7 +31,7 @@ type OpenMeteoResponse = z.infer<typeof openMeteoResponseSchema>
 
 function severity(
   value: number | null,
-  [none, low, medium]: readonly [number, number, number, number],
+  [none, low, medium]: readonly [number, number, number],
 ): PollenSeverity {
   if (value == null || value <= none) return 'none'
   if (value <= low) return 'low'
