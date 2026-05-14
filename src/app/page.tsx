@@ -1,4 +1,3 @@
-import { use } from 'react'
 import { getData } from '../actions/data-action'
 import '../styles/global.css'
 import { CityElements } from './CityElements'
@@ -6,8 +5,8 @@ import { LastUpdateTimestamp } from './LastUpdateTimestamp'
 
 export const revalidate = 3600
 
-export default function RootPage() {
-  const data = use(getData())
+export default async function RootPage() {
+  const data = await getData()
 
   return (
     <>
