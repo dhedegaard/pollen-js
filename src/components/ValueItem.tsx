@@ -1,5 +1,16 @@
-import clsx from 'clsx'
+import { cva } from 'class-variance-authority'
 import { PollenSeverity } from '../clients/open-meteo-client'
+
+const valueClass = cva('font-bold', {
+  variants: {
+    severity: {
+      none: 'text-slate-600',
+      low: 'text-lime-700',
+      medium: 'text-yellow-600',
+      high: 'text-red-600',
+    },
+  },
+})
 
 type Props = {
   value: number | null
@@ -10,20 +21,5 @@ export function ValueItem({ value, severity }: Props) {
     return <span className="text-slate-600">-</span>
   }
 
-  return (
-    <span
-      className={clsx(
-        'font-bold',
-        severity === 'none'
-          ? 'text-slate-600'
-          : severity === 'low'
-            ? 'text-lime-700'
-            : severity === 'medium'
-              ? 'text-yellow-600'
-              : 'text-red-600',
-      )}
-    >
-      {value.toString()}
-    </span>
-  )
+  return <span className={valueClass({ severity })}>{value.toString()}</span>
 }
