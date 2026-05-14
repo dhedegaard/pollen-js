@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import * as z from 'zod'
 
 export type PollenSeverity = 'none' | 'low' | 'medium' | 'high'
 
@@ -39,7 +39,11 @@ function severity(
   return 'high'
 }
 
-function dailyPeak(times: string[], values: (number | null)[], date: string): number | null {
+function dailyPeak(
+  times: string[],
+  values: (number | null)[],
+  date: string,
+): number | null {
   const dayValues = times
     .map((t, i) => (t.startsWith(date) ? values[i] : null))
     .filter((v): v is number => v != null)
@@ -50,7 +54,8 @@ function parseCity(response: OpenMeteoResponse, cityName: string) {
   const { time } = response.hourly
   const today = time[0]?.slice(0, 10) ?? ''
   // Find the first time entry that belongs to a different date than today
-  const tomorrowDate = time.find((t) => t.slice(0, 10) !== today)?.slice(0, 10) ?? ''
+  const tomorrowDate =
+    time.find((t) => t.slice(0, 10) !== today)?.slice(0, 10) ?? ''
 
   return {
     city: cityName,
@@ -81,7 +86,9 @@ async function fetchCity(city: (typeof CITIES)[number]) {
     `https://air-quality-api.open-meteo.com/v1/air-quality?${params.toString()}`,
   )
   if (!response.ok) {
-    throw new Error(`Open-Meteo error for ${city.city}: ${response.status.toString()} ${response.statusText}`)
+    throw new Error(
+      `Open-Meteo error for ${city.city}: ${response.status.toString()} ${response.statusText}`,
+    )
   }
   const json: unknown = await response.json()
   return openMeteoResponseSchema.parseAsync(json)
@@ -104,7 +111,9 @@ export interface PollenFeedData {
 export const createOpenMeteoClient = () => ({
   getPollenFeed: async function getPollenFeed(): Promise<PollenFeedData> {
     const responses = await Promise.all(
-      CITIES.map((city) => fetchCity(city).then((r) => parseCity(r, city.city))),
+      CITIES.map((city) =>
+        fetchCity(city).then((r) => parseCity(r, city.city)),
+      ),
     )
     return {
       updateTime: new Date().toISOString(),
