@@ -52,7 +52,7 @@ export const GET = async (request: NextRequest) => {
             description: `Pollen data for ${city.city}: ${city.levels
               .flatMap((level) =>
                 level.level != null && level.level > 0
-                  ? [`${level.label}: ${level.level}`]
+                  ? [`${level.label}: ${level.level.toString()}`]
                   : [],
               )
               .join(' - ')}`,
