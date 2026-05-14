@@ -1,5 +1,4 @@
 import { getData } from '../actions/data-action'
-import '../styles/global.css'
 import { CityElements } from './CityElements'
 import { LastUpdateTimestamp } from './LastUpdateTimestamp'
 
