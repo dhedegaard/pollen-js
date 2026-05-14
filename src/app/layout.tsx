@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Props) {
           rel="alternate"
           type="application/rss+xml"
           title="Pollen RSS feed"
-          href="/feed"
+          href="/rss"
         />
       </head>
       <body className="tracking-wide">
