@@ -1,5 +1,5 @@
 import { getPollenFeed } from '../clients/open-meteo-client'
-import { CityElements } from './CityElements'
+import { CityElement } from '../components/CityElement'
 import { LastUpdateTimestamp } from './LastUpdateTimestamp'
 
 export default async function RootPage() {
@@ -8,11 +8,13 @@ export default async function RootPage() {
   return (
     <>
       <div className="mb-4 grid grid-cols-2 items-start gap-4 px-4">
-        <CityElements data={data} />
+        {data.cities.map((city) => (
+          <CityElement key={city.city} element={city} />
+        ))}
       </div>
 
       <footer className="my-2 ml-auto flex flex-col gap-1 px-4 text-right text-sm">
-        <LastUpdateTimestamp data={data} />
+        <LastUpdateTimestamp updateTime={data.updateTime} />
         <div>
           Get the data:{' '}
           <a className="underline text-lime-700" href="/json">

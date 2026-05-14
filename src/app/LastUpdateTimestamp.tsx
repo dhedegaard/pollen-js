@@ -1,15 +1,13 @@
-import { PollenFeedData } from '../clients/open-meteo-client'
-
 interface Props {
-  data: PollenFeedData
+  updateTime: string
 }
 
-export function LastUpdateTimestamp({ data }: Props) {
+export function LastUpdateTimestamp({ updateTime }: Props) {
   return (
     <div>
       Last data timestamp:{' '}
       <span className="font-semibold">
-        {new Date(data.updateTime).toLocaleString('en-GB')}
+        {new Date(updateTime).toLocaleString('en-GB')}
       </span>
     </div>
   )
