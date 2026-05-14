@@ -1,8 +1,8 @@
 import { memo, useMemo } from 'react'
-import { AstmaAllergiFeedData } from '../clients/astma-allergi-client'
+import { PollenFeedData } from '../clients/open-meteo-client'
 
 interface Props {
-  data: AstmaAllergiFeedData
+  data: PollenFeedData
 }
 
 export const LastUpdateTimestamp = memo(function LastUpdateTimestamp({

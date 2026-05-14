@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { memo } from 'react'
-import { PollenSeverity } from '../clients/astma-allergi-client'
+import { PollenSeverity } from '../clients/open-meteo-client'
 
 type Props = {
   value: number | null

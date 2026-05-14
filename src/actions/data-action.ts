@@ -1,14 +1,14 @@
 'use server'
 
 import {
-  AstmaAllergiFeedData,
-  createAstmaAllergiClient,
-} from '../clients/astma-allergi-client'
+  createOpenMeteoClient,
+  PollenFeedData,
+} from '../clients/open-meteo-client'
 
-export async function getData(): Promise<AstmaAllergiFeedData> {
+export async function getData(): Promise<PollenFeedData> {
   try {
-    const astmaAllergiClient = createAstmaAllergiClient()
-    return await astmaAllergiClient.getPollenFeed()
+    const client = createOpenMeteoClient()
+    return await client.getPollenFeed()
   } catch (error: unknown) {
     console.error(error)
     throw error
