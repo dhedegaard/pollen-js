@@ -10,8 +10,8 @@ export function CityElement({ element }: Props) {
     <section className="grid grid-cols-1 items-stretch rounded-lg border border-solid border-slate-100 text-slate-900 shadow-sm">
       <div className="grid grid-cols-3 border-b border-solid border-slate-200 p-3">
         <span className="text-base">{element.city}</span>
-        <span className="self-center text-xs text-slate-400">Today</span>
-        <span className="self-center text-xs text-slate-400">Tomorrow</span>
+        <span className="self-center text-xs text-slate-600">Today</span>
+        <span className="self-center text-xs text-slate-600">Tomorrow</span>
       </div>
 
       {element.levels.map((level) => (
@@ -21,7 +21,10 @@ export function CityElement({ element }: Props) {
         >
           <span>{level.label}</span>
           <ValueItem value={level.level} severity={level.severity} />
-          <ValueItem value={level.tomorrowLevel} severity={level.tomorrowSeverity} />
+          <ValueItem
+            value={level.tomorrowLevel}
+            severity={level.tomorrowSeverity}
+          />
         </div>
       ))}
     </section>
