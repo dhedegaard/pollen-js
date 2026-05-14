@@ -10,9 +10,6 @@ export const ValueItem = memo<Props>(function ValueItem({ value, severity }) {
   if (value == null || value < 1) {
     return <span className="text-slate-600">-</span>
   }
-  if (typeof value === 'string') {
-    return <span className="text-red-600">{value}</span>
-  }
 
   return (
     <span
