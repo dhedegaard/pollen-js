@@ -36,6 +36,7 @@ export const GET = async (request: NextRequest) => {
         },
         item: data.cities.map((city) => ({
           title: city.city,
+          pubDate: new Date(data.updateTime).toUTCString(),
           description: `Pollen data for ${city.city}: ${city.levels
             .filter((level) => level.level != null)
             .map((level) => `${level.label}: ${level.level?.toString() ?? '-'}`)
