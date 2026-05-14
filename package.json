@@ -16,10 +16,10 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "fast-xml-builder": "^1.2.0",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "xmlbuilder2": "^4.0.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {

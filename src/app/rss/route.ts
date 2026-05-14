@@ -19,38 +19,46 @@ export const GET = async (request: NextRequest) => {
   const atomLink = new URL(baseURL)
   atomLink.pathname = request.nextUrl.pathname
 
-  const { create } = await import('xmlbuilder2')
-  const xml = create({
-    rss: {
-      '@xmlns:atom': 'http://www.w3.org/2005/Atom',
-      '@version': '2.0',
-      channel: {
-        title: 'Pollen',
-        link: link.href,
-        description: 'Pollen data for Denmark',
-        lastBuildDate: new Date(data.updateTime).toUTCString(),
-        'atom:link': {
-          '@href': atomLink.toString(),
-          '@rel': 'self',
-          '@type': 'application/rss+xml',
-        },
-        item: data.cities.map((city) => ({
-          title: city.city,
-          pubDate: new Date(data.updateTime).toUTCString(),
-          description: `Pollen data for ${city.city}: ${city.levels
-            .filter((level) => level.level != null && level.level > 0)
-            .map((level) => `${level.label}: ${level.level?.toString() ?? '-'}`)
-            .join(' - ')}`,
-          guid: {
-            '@isPermaLink': false,
-            '#': city.city,
-          },
-        })),
-      },
-    },
-  }).end({
-    prettyPrint: process.env.NODE_ENV !== 'production',
+  const { default: XMLBuilder } = await import('fast-xml-builder')
+  const builder = new XMLBuilder({
+    ignoreAttributes: false,
+    attributeNamePrefix: '@',
+    textNodeName: '#',
+    format: process.env.NODE_ENV !== 'production',
+    indentBy: '  ',
+    suppressEmptyNode: true,
   })
+  const xml =
+    '<?xml version="1.0"?>\n' +
+    builder.build({
+      rss: {
+        '@xmlns:atom': 'http://www.w3.org/2005/Atom',
+        '@version': '2.0',
+        channel: {
+          title: 'Pollen',
+          link: link.href,
+          description: 'Pollen data for Denmark',
+          lastBuildDate: new Date(data.updateTime).toUTCString(),
+          'atom:link': {
+            '@href': atomLink.toString(),
+            '@rel': 'self',
+            '@type': 'application/rss+xml',
+          },
+          item: data.cities.map((city) => ({
+            title: city.city,
+            pubDate: new Date(data.updateTime).toUTCString(),
+            description: `Pollen data for ${city.city}: ${city.levels
+              .filter((level) => level.level != null && level.level > 0)
+              .map((level) => `${level.label}: ${level.level?.toString() ?? '-'}`)
+              .join(' - ')}`,
+            guid: {
+              '@isPermaLink': false,
+              '#': city.city,
+            },
+          })),
+        },
+      },
+    })
 
   return new Response(xml, {
     headers: { 'Content-Type': 'application/rss+xml; charset=utf-8' },
