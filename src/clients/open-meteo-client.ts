@@ -4,10 +4,10 @@ import * as z from 'zod'
 export type PollenSeverity = 'none' | 'low' | 'medium' | 'high'
 
 const POLLEN_TYPES = [
-  { key: 'birch_pollen', label: 'Birk', thresholds: [0, 30, 100] },
-  { key: 'grass_pollen', label: 'Græs', thresholds: [0, 10, 50] },
-  { key: 'alder_pollen', label: 'El', thresholds: [0, 10, 50] },
-  { key: 'mugwort_pollen', label: 'Bynke', thresholds: [0, 10, 50] },
+  { key: 'birch_pollen', label: 'Birk', thresholds: [30, 100] },
+  { key: 'grass_pollen', label: 'Græs', thresholds: [10, 50] },
+  { key: 'alder_pollen', label: 'El', thresholds: [10, 50] },
+  { key: 'mugwort_pollen', label: 'Bynke', thresholds: [10, 50] },
 ] as const
 
 const CITIES = [
@@ -32,7 +32,7 @@ type OpenMeteoResponse = z.infer<typeof openMeteoResponseSchema>
 
 function severity(
   value: number | null,
-  [, low, medium]: readonly [number, number, number],
+  [low, medium]: readonly [number, number],
 ): PollenSeverity {
   if (value == null || value < 1) return 'none'
   if (value <= low) return 'low'
@@ -54,7 +54,6 @@ function dailyPeak(
 function parseCity(response: OpenMeteoResponse, cityName: string) {
   const { time } = response.hourly
   const today = time[0]?.slice(0, 10) ?? ''
-  // Find the first time entry that belongs to a different date than today
   const tomorrowDate =
     time.find((t) => t.slice(0, 10) !== today)?.slice(0, 10) ?? ''
 
