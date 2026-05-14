@@ -7,7 +7,7 @@ export default async function RootPage() {
 
   return (
     <>
-      <div className="mb-4 grid grid-cols-2 items-start gap-4 px-4">
+      <div className="mb-4 grid grid-cols-1 items-start gap-4 px-4 sm:grid-cols-2">
         {data.cities.map((city) => (
           <CityElement key={city.city} element={city} />
         ))}
