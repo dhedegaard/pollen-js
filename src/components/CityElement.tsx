@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { PollenFeedData } from '../clients/open-meteo-client'
 import { ValueItem } from '../components/ValueItem'
 
@@ -6,7 +5,7 @@ interface Props {
   element: PollenFeedData['cities'][number]
 }
 
-export const CityElement = memo<Props>(function CityElement({ element }) {
+export function CityElement({ element }: Props) {
   return (
     <section className="card grid grid-cols-1 items-stretch rounded-lg border border-solid border-slate-100 text-base-content shadow-sm">
       <div className="border-b border-solid border-slate-200 p-3 text-base">

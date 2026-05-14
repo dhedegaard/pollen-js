@@ -1,12 +1,11 @@
 import clsx from 'clsx'
-import { memo } from 'react'
 import { PollenSeverity } from '../clients/open-meteo-client'
 
 type Props = {
   value: number | null
   severity: PollenSeverity
 }
-export const ValueItem = memo<Props>(function ValueItem({ value, severity }) {
+export function ValueItem({ value, severity }: Props) {
   if (value == null || value < 1) {
     return <span className="text-slate-600">-</span>
   }

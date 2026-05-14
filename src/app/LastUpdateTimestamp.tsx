@@ -1,13 +1,10 @@
-import { memo } from 'react'
 import { PollenFeedData } from '../clients/open-meteo-client'
 
 interface Props {
   data: PollenFeedData
 }
 
-export const LastUpdateTimestamp = memo(function LastUpdateTimestamp({
-  data,
-}: Props) {
+export function LastUpdateTimestamp({ data }: Props) {
   return (
     <div>
       Last data timestamp:{' '}
@@ -16,4 +13,4 @@ export const LastUpdateTimestamp = memo(function LastUpdateTimestamp({
       </span>
     </div>
   )
-})
+}
