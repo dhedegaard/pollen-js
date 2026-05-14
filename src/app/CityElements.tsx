@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import { PollenFeedData } from '../clients/open-meteo-client'
 import { CityElement } from '../components/CityElement'
 
@@ -6,9 +6,7 @@ interface Props {
   data: PollenFeedData
 }
 export const CityElements = memo(function CityElements({ data }: Props) {
-  const cities = useMemo(() => data.cities, [data.cities])
-
-  return cities.map((element) => (
+  return data.cities.map((element) => (
     <CityElement element={element} key={element.city} />
   ))
 })

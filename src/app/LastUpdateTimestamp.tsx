@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
 import { PollenFeedData } from '../clients/open-meteo-client'
 
 interface Props {
@@ -12,10 +12,7 @@ export const LastUpdateTimestamp = memo(function LastUpdateTimestamp({
     <div>
       Last data timestamp:{' '}
       <span className="font-semibold">
-        {useMemo(
-          () => new Date(data.updateTime).toLocaleString('en-GB'),
-          [data.updateTime],
-        )}
+        {new Date(data.updateTime).toLocaleString('en-GB')}
       </span>
     </div>
   )
