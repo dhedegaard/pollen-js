@@ -7,7 +7,7 @@ interface Props {
 
 export function CityElement({ element }: Props) {
   return (
-    <section className="card grid grid-cols-1 items-stretch rounded-lg border border-solid border-slate-100 text-base-content shadow-sm">
+    <section className="grid grid-cols-1 items-stretch rounded-lg border border-solid border-slate-100 text-slate-900 shadow-sm">
       <div className="border-b border-solid border-slate-200 p-3 text-base">
         {element.city}
       </div>

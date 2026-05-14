@@ -17,11 +17,11 @@ export default async function RootPage() {
         <LastUpdateTimestamp data={data} />
         <div>
           Get the data:{' '}
-          <a className="link link-primary" href="/json">
+          <a className="underline text-lime-700" href="/json">
             JSON
           </a>{' '}
           -{' '}
-          <a className="link link-primary" href="/rss">
+          <a className="underline text-lime-700" href="/rss">
             RSS
           </a>
           .
@@ -30,7 +30,7 @@ export default async function RootPage() {
           Get the source on{' '}
           <a
             href="https://github.com/dhedegaard/pollen-js"
-            className="link link-primary"
+            className="underline text-lime-700"
             target="_blank"
             rel="noreferrer noopener"
           >
