@@ -27,6 +27,7 @@ const eslintConfig = defineConfig([
     'src/codegen/**',
     '.prettier*',
     '*.config.*',
+    '.claude/**',
   ]),
 ])
 
