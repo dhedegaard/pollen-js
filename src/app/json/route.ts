@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server'
-import { createAstmaAllergiClient } from '../../clients/astma-allergi-client'
+import { getData } from '../../actions/data-action'
 
 export const GET = async () => {
   try {
-    const astmaAllergiClient = createAstmaAllergiClient()
-    const data = await astmaAllergiClient.getPollenFeed()
+    const data = await getData()
     return NextResponse.json(data)
   } catch (error: unknown) {
     console.error(error)
