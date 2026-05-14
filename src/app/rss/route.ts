@@ -1,3 +1,4 @@
+import XMLBuilder from 'fast-xml-builder'
 import { NextRequest } from 'next/server'
 import { getData } from '../../actions/data-action'
 
@@ -19,7 +20,6 @@ export const GET = async (request: NextRequest) => {
   const atomLink = new URL(baseURL)
   atomLink.pathname = request.nextUrl.pathname
 
-  const { default: XMLBuilder } = await import('fast-xml-builder')
   const builder = new XMLBuilder({
     ignoreAttributes: false,
     attributeNamePrefix: '@',
@@ -49,7 +49,9 @@ export const GET = async (request: NextRequest) => {
             pubDate: new Date(data.updateTime).toUTCString(),
             description: `Pollen data for ${city.city}: ${city.levels
               .filter((level) => level.level != null && level.level > 0)
-              .map((level) => `${level.label}: ${level.level?.toString() ?? '-'}`)
+              .map(
+                (level) => `${level.label}: ${level.level?.toString() ?? '-'}`,
+              )
               .join(' - ')}`,
             guid: {
               '@isPermaLink': false,
