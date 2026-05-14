@@ -30,4 +30,4 @@ export function CityElement({ element }: Props) {
       ))}
     </section>
   )
-})
+}

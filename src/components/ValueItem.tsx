@@ -26,4 +26,4 @@ export function ValueItem({ value, severity }: Props) {
       {value.toString()}
     </span>
   )
-})
+}
