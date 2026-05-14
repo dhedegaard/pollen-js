@@ -1,9 +1,9 @@
-import { getData } from '../actions/data-action'
+import { getPollenFeed } from '../clients/open-meteo-client'
 import { CityElements } from './CityElements'
 import { LastUpdateTimestamp } from './LastUpdateTimestamp'
 
 export default async function RootPage() {
-  const data = await getData()
+  const data = await getPollenFeed()
 
   return (
     <>

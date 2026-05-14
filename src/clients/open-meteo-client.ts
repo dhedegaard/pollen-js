@@ -109,19 +109,15 @@ export interface PollenFeedData {
   }>
 }
 
-export const createOpenMeteoClient = () => ({
-  getPollenFeed: async function getPollenFeed(): Promise<PollenFeedData> {
-    'use cache'
-    cacheLife('hours')
-    cacheTag('pollen-feed')
-    const responses = await Promise.all(
-      CITIES.map((city) =>
-        fetchCity(city).then((r) => parseCity(r, city.city)),
-      ),
-    )
-    return {
-      updateTime: new Date().toISOString(),
-      cities: responses,
-    }
-  },
-})
+export async function getPollenFeed(): Promise<PollenFeedData> {
+  'use cache'
+  cacheLife('hours')
+  cacheTag('pollen-feed')
+  const responses = await Promise.all(
+    CITIES.map((city) => fetchCity(city).then((r) => parseCity(r, city.city))),
+  )
+  return {
+    updateTime: new Date().toISOString(),
+    cities: responses,
+  }
+}

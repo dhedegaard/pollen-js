@@ -1,9 +1,9 @@
 import XMLBuilder from 'fast-xml-builder'
 import { NextRequest } from 'next/server'
-import { getData } from '../../actions/data-action'
+import { getPollenFeed } from '../../clients/open-meteo-client'
 
 export const GET = async (request: NextRequest) => {
-  const data = await getData()
+  const data = await getPollenFeed()
 
   const baseURL = new URL(request.url)
   const host = request.headers.get('host')

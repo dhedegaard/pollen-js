@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { getData } from '../../actions/data-action'
+import { getPollenFeed } from '../../clients/open-meteo-client'
 
 export const GET = async () => {
-  const data = await getData()
+  const data = await getPollenFeed()
   return NextResponse.json(data)
 }
