@@ -45,9 +45,10 @@ function dailyPeak(
   values: (number | null)[],
   date: string,
 ): number | null {
-  const dayValues = times
-    .map((t, i) => (t.startsWith(date) ? values[i] : null))
-    .filter((v): v is number => v != null)
+  const dayValues = times.flatMap((timestamp, index) => {
+    const value = values[index]
+    return timestamp.startsWith(date) && value != null ? [value] : []
+  })
   return dayValues.length > 0 ? Math.round(Math.max(...dayValues)) : null
 }
 
