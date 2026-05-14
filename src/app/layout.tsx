@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 import { Logo } from '../components/Logo'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://pollen.dhedegaard.dk'),
   title: 'Pollen',
   description: 'Pollen',
   robots: { index: true, follow: true },
