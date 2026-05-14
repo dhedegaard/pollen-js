@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
   }
   const forwardedProto = request.headers.get('x-forwarded-proto')
   if (forwardedProto != null && forwardedProto.length > 0) {
-    baseURL.protocol = forwardedProto
+    baseURL.protocol = (forwardedProto.split(',')[0] ?? forwardedProto).trim()
     baseURL.port = ''
   }
   const link = new URL(baseURL)
@@ -55,7 +55,7 @@ export const GET = async (request: NextRequest) => {
               .join(' - ')}`,
             guid: {
               '@isPermaLink': false,
-              '#': city.city,
+              '#': `${city.city}-${data.updateTime}`,
             },
           })),
         },
