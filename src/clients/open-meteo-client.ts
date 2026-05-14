@@ -32,9 +32,9 @@ type OpenMeteoResponse = z.infer<typeof openMeteoResponseSchema>
 
 function severity(
   value: number | null,
-  [none, low, medium]: readonly [number, number, number],
+  [, low, medium]: readonly [number, number, number],
 ): PollenSeverity {
-  if (value == null || value <= none) return 'none'
+  if (value == null || value < 1) return 'none'
   if (value <= low) return 'low'
   if (value <= medium) return 'medium'
   return 'high'
