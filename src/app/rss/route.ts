@@ -20,6 +20,8 @@ export const GET = async (request: NextRequest) => {
   const atomLink = new URL(baseURL)
   atomLink.pathname = request.nextUrl.pathname
 
+  const lastBuildDate = new Date(data.updateTime).toUTCString()
+
   const builder = new XMLBuilder({
     ignoreAttributes: false,
     attributeNamePrefix: '@',
@@ -38,7 +40,7 @@ export const GET = async (request: NextRequest) => {
           title: 'Pollen',
           link: link.href,
           description: 'Pollen data for Denmark',
-          lastBuildDate: new Date(data.updateTime).toUTCString(),
+          lastBuildDate,
           'atom:link': {
             '@href': atomLink.toString(),
             '@rel': 'self',
@@ -46,7 +48,7 @@ export const GET = async (request: NextRequest) => {
           },
           item: data.cities.map((city) => ({
             title: city.city,
-            pubDate: new Date(data.updateTime).toUTCString(),
+            pubDate: lastBuildDate,
             description: `Pollen data for ${city.city}: ${city.levels
               .filter((level) => level.level != null && level.level > 0)
               .map(
