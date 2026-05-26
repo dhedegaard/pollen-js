@@ -3,14 +3,14 @@ import * as z from 'zod'
 
 export type PollenSeverity = 'none' | 'low' | 'medium' | 'high'
 
-const POLLEN_TYPES = [
+export const POLLEN_TYPES = [
   { key: 'birch_pollen', label: 'Birk', thresholds: [30, 100] },
   { key: 'grass_pollen', label: 'Græs', thresholds: [10, 50] },
   { key: 'alder_pollen', label: 'El', thresholds: [10, 50] },
   { key: 'mugwort_pollen', label: 'Bynke', thresholds: [10, 50] },
 ] as const
 
-const CITIES = [
+export const CITIES = [
   { city: 'Copenhagen', lat: 55.6761, lon: 12.5683 },
   { city: 'Aarhus', lat: 56.1629, lon: 10.2039 },
 ] as const
