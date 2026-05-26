@@ -23,6 +23,10 @@ export default async function RootPage() {
           -{' '}
           <a className="underline text-lime-700" href="/rss">
             RSS
+          </a>{' '}
+          -{' '}
+          <a className="underline text-lime-700" href="/mcp">
+            MCP
           </a>
           .
         </div>
