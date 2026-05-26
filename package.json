@@ -17,6 +17,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "fast-xml-builder": "^1.2.0",
+    "mcp-handler": "^1.1.0",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6",
