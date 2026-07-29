@@ -18,9 +18,9 @@
     "class-variance-authority": "^0.7.1",
     "fast-xml-builder": "^1.2.0",
     "mcp-handler": "^1.1.0",
-    "next": "16.2.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -28,11 +28,11 @@
     "@tsconfig/next": "^2.0.6",
     "@tsconfig/strictest": "^2.0.8",
     "@types/node": "^24.12.4",
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "^1.0.0",
-    "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.12",
     "postcss": "^8.5.14",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
@@ -41,7 +41,7 @@
     "typescript-eslint": "^8.59.3"
   },
   "overrides": {
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3"
   }
 }
