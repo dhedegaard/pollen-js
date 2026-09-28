@@ -16,7 +16,7 @@ const handler = createMcpHandler(
         title: 'Get pollen feed',
         description:
           'Returns current and next-day pollen levels for all supported Danish cities (Copenhagen, Aarhus) across all tracked species, with severity classification.',
-        inputSchema: {},
+        inputSchema: z.object({}),
       },
       async () => {
         const feed = await getPollenFeed()
@@ -32,9 +32,9 @@ const handler = createMcpHandler(
         title: 'Get pollen for a city',
         description:
           'Returns current and next-day pollen levels for a single Danish city.',
-        inputSchema: {
+        inputSchema: z.object({
           city: z.enum(cityNames).describe('City name (Copenhagen or Aarhus)'),
-        },
+        }),
       },
       async ({ city }) => {
         const feed = await getPollenFeed()
@@ -56,7 +56,7 @@ const handler = createMcpHandler(
       {
         title: 'List supported cities',
         description: 'Returns the cities for which pollen data is available.',
-        inputSchema: {},
+        inputSchema: z.object({}),
       },
       () => {
         const cities = CITIES.map(({ city, lat, lon }) => ({
@@ -76,7 +76,7 @@ const handler = createMcpHandler(
         title: 'List tracked pollen species',
         description:
           'Returns the pollen species tracked by this server, with their Danish labels and severity thresholds.',
-        inputSchema: {},
+        inputSchema: z.object({}),
       },
       () => {
         const species = POLLEN_TYPES.map(({ key, label, thresholds }) => ({
@@ -93,11 +93,6 @@ const handler = createMcpHandler(
   {
     serverInfo: { name: 'pollen-dk', version: '1.0.0' },
     capabilities: { tools: {} },
-  },
-  {
-    basePath: '',
-    disableSse: true,
-    maxDuration: 60,
     verboseLogs: process.env['NODE_ENV'] !== 'production',
   },
 )
