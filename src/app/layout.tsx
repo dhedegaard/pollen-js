@@ -1,6 +1,6 @@
 import '../styles/global.css'
 
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { ReactNode } from 'react'
 import { Logo } from '../components/Logo'
 
@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  themeColor: '#fff',
+}
+
 interface Props {
   children: ReactNode
 }
@@ -29,12 +33,6 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta name="theme-color" content="#fff" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />

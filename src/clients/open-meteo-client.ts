@@ -15,16 +15,21 @@ export const CITIES = [
   { city: 'Aarhus', lat: 56.1629, lon: 10.2039 },
 ] as const
 
+type PollenKey = (typeof POLLEN_TYPES)[number]['key']
+
+const pollenValuesSchema = z.array(z.nullable(z.number()))
+// Object.fromEntries loses the key types, so restore them from POLLEN_TYPES.
+const pollenValuesShape = Object.fromEntries(
+  POLLEN_TYPES.map(({ key }) => [key, pollenValuesSchema]),
+) as Record<PollenKey, typeof pollenValuesSchema>
+
 const openMeteoResponseSchema = z.object({
   latitude: z.number(),
   longitude: z.number(),
   timezone: z.string(),
   hourly: z.object({
     time: z.array(z.string()),
-    birch_pollen: z.array(z.nullable(z.number())),
-    grass_pollen: z.array(z.nullable(z.number())),
-    alder_pollen: z.array(z.nullable(z.number())),
-    mugwort_pollen: z.array(z.nullable(z.number())),
+    ...pollenValuesShape,
   }),
 })
 
@@ -81,7 +86,7 @@ async function fetchCity(city: (typeof CITIES)[number]) {
   const params = new URLSearchParams({
     latitude: city.lat.toString(),
     longitude: city.lon.toString(),
-    hourly: 'birch_pollen,grass_pollen,alder_pollen,mugwort_pollen',
+    hourly: POLLEN_TYPES.map(({ key }) => key).join(','),
     forecast_days: '2',
     timezone: 'Europe/Copenhagen',
   })
