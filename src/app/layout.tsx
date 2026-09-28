@@ -47,7 +47,7 @@ export default function RootLayout({ children }: Props) {
           href="/rss"
         />
       </head>
-      <body className="tracking-wide">
+      <body className="bg-white tracking-wide">
         <header className="mb-4 bg-lime-500 py-3 shadow-sm">
           <div className="mx-auto flex max-w-6xl items-center justify-center px-4">
             <h1 className="flex flex-auto items-center gap-1 text-xl tracking-wide">

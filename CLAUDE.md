@@ -14,13 +14,19 @@ There are no tests. CI runs `build` then `lint` on every push.
 
 MCP smoke test (after `npm run build && npm start`): `curl -X POST localhost:3000/mcp -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` — both `Accept` types are required (406 otherwise); replies come back as SSE `data:` lines.
 
+`next` and `eslint-config-next` are pinned to exact versions (bump both together with `npm install --save-exact`); `npm update` won't move them.
+
+There's no `format` script and several files already fail `prettier --check`, so format only the files you touch.
+
+Known-blocked majors (as of 2026-09): TypeScript 7 (`typescript-eslint` supports TypeScript below 6.1 only), ESLint 10 (the ESLint plugins `eslint-config-next` pulls in don't support it yet). Keep `@types/node` on 24 to match the Node 24 runtime.
+
 ## Architecture
 
 A minimal Next.js 16 App Router site (React 19, TypeScript, Tailwind v4) that displays Danish pollen levels for Copenhagen and Aarhus. The React Compiler (`babel-plugin-react-compiler`) is enabled.
 
 **Data flow:**
 1. `src/clients/open-meteo-client.ts` — fetches 2-day hourly pollen data from the Open-Meteo air-quality API for each city, computes daily peaks, and classifies severity (`none/low/medium/high`) against per-species thresholds. `getPollenFeed()` uses the Next.js 16 `'use cache'` directive (`cacheLife('hours')` + `cacheTag('pollen-feed')`). The `POLLEN_TYPES` and `CITIES` arrays are exported as the single source of truth — consumed by the page, JSON/RSS routes, and the MCP `list_*` tools.
-2. `src/app/page.tsx` — server component that calls `getPollenFeed()` directly and renders city cards.
+2. `src/app/page.tsx` — server component that calls `getPollenFeed()` directly and renders city cards. `/` is prerendered at build time, so `npm run build` needs network access to Open-Meteo (requests time out after 10s). The last-update timestamp is deliberately shown in UTC (`timeZone: 'UTC'` plus a "UTC" label). Don't switch it to Danish time.
 3. `src/app/json/route.ts` — returns `PollenFeedData` as JSON.
 4. `src/app/rss/route.ts` — returns an RSS 2.0 feed built with `fast-xml-builder`.
 5. `src/app/mcp/route.ts` — Model Context Protocol server (Streamable HTTP, **POST-only**). Uses `mcp-handler` v2 (on `@modelcontextprotocol/server` v2), which mounts at whatever route file it's exported from — no route/transport config. It serves the stateless 2026-07-28 protocol with a legacy fallback for 2025-era Streamable HTTP clients; tool `inputSchema`s must be full `z.object(...)` schemas. Only `POST` is exported: the endpoint is stateless and needs no GET listen stream, and without a GET export `GET`/`HEAD` return 405. Four tools — `get_pollen_feed`, `get_city_pollen`, `list_cities`, `list_species` — all delegate to `getPollenFeed()` so the existing `'use cache'` layer applies unchanged. Invalid tool arguments come back as a tool result with `isError: true`; an unknown tool name is a JSON-RPC `-32602` error.
