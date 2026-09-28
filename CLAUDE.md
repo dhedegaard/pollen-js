@@ -31,4 +31,4 @@ A minimal Next.js 16 App Router site (React 19, TypeScript, Tailwind v4) that di
 
 Docker image (`Dockerfile`) runs `npm ci && npm run build` then `npm start`. Published via GitHub Actions (`docker-publish.yml`). The live site is at `https://pollen.dhedegaard.dk/` and exposes JSON (`/json`), RSS (`/rss`), and MCP (`/mcp`) endpoints in addition to the HTML page.
 
-A push to `main` runs three workflows: Node.js CI (`node.js.yml`), Docker (`docker-publish.yml`) and CodeQL. The live site picks up the new image automatically once Docker succeeds, so `https://pollen.dhedegaard.dk/mcp` can be used to confirm a deploy.
+A push to `main` runs two workflows, Node.js CI (`node.js.yml`) and Docker (`docker-publish.yml`), plus CodeQL via GitHub's default code-scanning setup (no workflow file). The live site picks up the new image automatically once Docker succeeds, so `https://pollen.dhedegaard.dk/mcp` can be used to confirm a deploy.
