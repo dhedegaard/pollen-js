@@ -7,7 +7,7 @@ export function LastUpdateTimestamp({ updateTime }: Props) {
     <div>
       Last data timestamp:{' '}
       <span className="font-semibold">
-        {new Date(updateTime).toLocaleString('en-GB')}
+        {new Date(updateTime).toLocaleString('en-GB', { timeZone: 'UTC' })} UTC
       </span>
     </div>
   )
