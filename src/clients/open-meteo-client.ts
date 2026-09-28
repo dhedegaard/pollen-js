@@ -75,6 +75,8 @@ function parseCity(response: OpenMeteoResponse, cityName: string) {
   }
 }
 
+const OPEN_METEO_TIMEOUT_MS = 10_000
+
 async function fetchCity(city: (typeof CITIES)[number]) {
   const params = new URLSearchParams({
     latitude: city.lat.toString(),
@@ -85,6 +87,8 @@ async function fetchCity(city: (typeof CITIES)[number]) {
   })
   const response = await fetch(
     `https://air-quality-api.open-meteo.com/v1/air-quality?${params.toString()}`,
+    // A hung request would otherwise stall rendering, including the build-time prerender.
+    { signal: AbortSignal.timeout(OPEN_METEO_TIMEOUT_MS) },
   )
   if (!response.ok) {
     throw new Error(
