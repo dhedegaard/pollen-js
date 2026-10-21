@@ -35,8 +35,6 @@ A minimal Next.js 16 App Router site (React 19, TypeScript, Tailwind v4) that di
 
 ## Deployment
 
-Docker image (`Dockerfile`) runs `npm ci && npm run build` then `npm start`. Published via GitHub Actions (`docker-publish.yml`). The live site is at `https://pollen.dhedegaard.dk/` and exposes JSON (`/json`), RSS (`/rss`), and MCP (`/mcp`) endpoints in addition to the HTML page.
+The live site at `https://pollen.dhedegaard.dk/` is served by Vercel, which builds every push to `main` (Git integration, no workflow file). It exposes JSON (`/json`), RSS (`/rss`), and MCP (`/mcp`) endpoints in addition to the HTML page. To confirm a deploy, check that the production alias points at the commit's deployment: `npx vercel inspect pollen.dhedegaard.dk` and compare the id with the `Vercel` commit status (`gh api repos/dhedegaard/pollen-js/commits/<sha>/status`).
 
-A push to `main` runs two workflows, Node.js CI (`node.js.yml`) and Docker (`docker-publish.yml`), plus CodeQL via GitHub's default code-scanning setup (no workflow file). The live site picks up the new image automatically once Docker succeeds, so `https://pollen.dhedegaard.dk/mcp` can be used to confirm a deploy.
-
-Vercel also builds every push to `main` (Git integration, no workflow file).
+A push to `main` also runs two workflows, Node.js CI (`node.js.yml`) and Docker (`docker-publish.yml`), plus CodeQL via GitHub's default code-scanning setup (no workflow file). The Docker image (`Dockerfile`, `npm ci && npm run build` then `npm start`) is published by `docker-publish.yml` but does not serve the live domain.
