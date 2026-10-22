@@ -15,10 +15,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@modelcontextprotocol/server": "^2.2.0",
+    "@modelcontextprotocol/server": "^2.3.1",
     "class-variance-authority": "^0.7.1",
     "fast-xml-builder": "^1.2.0",
-    "mcp-handler": "^2.2.0",
     "next": "16.4.2",
     "react": "19.3.1",
     "react-dom": "19.3.1",

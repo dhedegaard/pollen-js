@@ -1,4 +1,4 @@
-import { createMcpHandler } from 'mcp-handler'
+import { McpServer, createMcpHandler } from '@modelcontextprotocol/server'
 import * as z from 'zod'
 import {
   CITIES,
@@ -8,8 +8,18 @@ import {
 
 const cityNames = CITIES.map((c) => c.city) as [string, ...string[]]
 
+// Tight limits against oversized tool inputs (GHSA-46jr-4wx8-v453); our tools
+// take at most one string argument, so real requests are well under 1 KB.
+const MAX_TOOL_INPUT_ELEMENTS = 100
+const MAX_REQUEST_BODY_SIZE = 64 * 1024
+
 const handler = createMcpHandler(
-  (server) => {
+  () => {
+    const server = new McpServer(
+      { name: 'pollen-dk', version: '1.0.0' },
+      { maxToolInputElements: MAX_TOOL_INPUT_ELEMENTS },
+    )
+
     server.registerTool(
       'get_pollen_feed',
       {
@@ -89,12 +99,18 @@ const handler = createMcpHandler(
         }
       },
     )
+
+    return server
   },
   {
-    serverInfo: { name: 'pollen-dk', version: '1.0.0' },
-    capabilities: { tools: {} },
-    verboseLogs: process.env['NODE_ENV'] !== 'production',
+    maxRequestBodySize: MAX_REQUEST_BODY_SIZE,
+    onerror: (error) => {
+      if (process.env['NODE_ENV'] !== 'production') {
+        console.error('MCP handler error:', error)
+      }
+    },
   },
 )
 
-export { handler as POST }
+export const POST = (request: Request): Promise<Response> =>
+  handler.fetch(request)
