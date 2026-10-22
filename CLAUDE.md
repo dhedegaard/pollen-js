@@ -13,6 +13,7 @@ npm run lint       # ESLint
 There are no tests. CI runs `build` then `lint` on every push.
 
 MCP smoke test (after `npm run build && npm start`): `curl -X POST localhost:3000/mcp -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'` — both `Accept` types are required (406 otherwise); replies come back as SSE `data:` lines.
+To check the CVE-2026-111768 limits, the same request should get 413 for a body over 64 KiB (also when sent chunked), and a `tools/call` with more than 100 argument elements should come back as an `isError` result. Run the same checks against `https://pollen.dhedegaard.dk/mcp` to confirm a deploy.
 
 `next` and `eslint-config-next` are pinned to exact versions (bump both together with `npm install --save-exact`); `npm update` won't move them.
 
